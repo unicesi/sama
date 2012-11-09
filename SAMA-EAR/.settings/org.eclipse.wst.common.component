@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="SAMA-EAR">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="SAMA-EJB.jar" deploy-path="/" handle="module:/resource/SAMA-EJB/SAMA-EJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SAMA-JPA.jar" deploy-path="/lib" handle="module:/resource/SAMA-JPA/SAMA-JPA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SAMA-EJBClient.jar" deploy-path="/lib" handle="module:/resource/SAMA-EJBClient/SAMA-EJBClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
