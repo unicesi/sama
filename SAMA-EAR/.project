@@ -3,8 +3,8 @@
 	<name>SAMA-EAR</name>
 	<comment></comment>
 	<projects>
-		<project>SAMA-EJB</project>
 		<project>SAMA-JPA</project>
+		<project>SAMA-EJB</project>
 		<project>SAMA-EJBClient</project>
 	</projects>
 	<buildSpec>

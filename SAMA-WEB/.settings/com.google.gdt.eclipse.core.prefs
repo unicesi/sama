@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
-lastWarOutDir=/Applications/NetBeans/glassfish-3.1.2.2/glassfish/domains/domain1/eclipseApps/SAMA-WEB
+lastWarOutDir=/Users/jdominguez92/Desktop/Programas Ingenieria de Software/glassfish3/glassfish/domains/domain1/eclipseApps/SAMA-WEB
 launchConfigExternalUrlPrefix=
 warSrcDir=WebContent
 warSrcDirIsOutput=false

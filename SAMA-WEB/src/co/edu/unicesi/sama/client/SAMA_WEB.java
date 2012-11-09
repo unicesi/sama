@@ -22,6 +22,9 @@ import co.edu.unicesi.sama.client.busqueda.BusquedaServiceAsync;
 import co.edu.unicesi.sama.client.busqueda.ListaProgramas;
 import co.edu.unicesi.sama.client.competencias.PanelCompetenciasProfesionales;
 import co.edu.unicesi.sama.client.competencias.PanelCompetenciasTransversales;
+import co.edu.unicesi.sama.client.competenciasEspecificas.PanelAsociarCompetenciasEspecificas;
+import co.edu.unicesi.sama.client.competenciasEspecificas.PanelAsociarCompetenciasEspecificasBloque;
+import co.edu.unicesi.sama.client.competenciasEspecificas.PanelFiltro;
 import co.edu.unicesi.sama.client.controller.DTEvent;
 import co.edu.unicesi.sama.client.controller.DTSamaController;
 import co.edu.unicesi.sama.client.materias.VentanaMateria;
@@ -41,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
@@ -62,6 +66,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -74,6 +79,9 @@ public class SAMA_WEB implements EntryPoint {
 	private PanelBloques panelBloques;
 	private PanelCompetenciasProfesionales panelProfesionales;
 	private PanelCompetenciasTransversales panelTransversales;
+	private PanelFiltro panelFiltro;
+	private PanelAsociarCompetenciasEspecificasBloque panelAsociarBloque;
+	private PanelAsociarCompetenciasEspecificas panelAsociar;
 	private final BusquedaServiceAsync busquedaService = GWT.create(BusquedaService.class);
 	
 	public void onModuleLoad() {
@@ -128,7 +136,7 @@ public class SAMA_WEB implements EntryPoint {
 		layoutContainer_1.add(btnAgregarMateria);
 		btnAgregarMateria.setWidth("197px");
 		verticalPanel.add(layoutContainer_1);
-		layoutContainer_1.setSize("250", "98");
+		layoutContainer_1.setSize("250", "100");
 		layoutContainer_1.setBorders(true);
 		layoutContainer.add(verticalPanel, new BorderLayoutData(LayoutRegion.WEST, 250.0f));
 		
@@ -147,7 +155,101 @@ public class SAMA_WEB implements EntryPoint {
 		
 		TabItem tbtmCompetenciasProfesionales = new TabItem("Competencias Profesionales");
 		panelProfesionales=new PanelCompetenciasProfesionales();
+		TableLayout tableLayout = (TableLayout) panelProfesionales.getLayout();
+		tableLayout.setColumns(18);
 		Registry.register("panelProfesionales", panelProfesionales);
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		panelProfesionales.add(new Text());
+		
+		ScrollPanel scrollPanel = new ScrollPanel();
+		panelProfesionales.add(scrollPanel);
 		tbtmCompetenciasProfesionales.add(panelProfesionales);
 		tabPanel.add(tbtmCompetenciasProfesionales);
 		
@@ -158,6 +260,17 @@ public class SAMA_WEB implements EntryPoint {
 		tabPanel.add(tbtmCompetenciasTransversales);
 		
 		TabItem tbtmAsociarCompetenciasEspecificas = new TabItem("Asociar Competencias Especificas");
+		panelFiltro = new PanelFiltro();
+		tbtmAsociarCompetenciasEspecificas.setScrollMode(Scroll.AUTOY);
+		Registry.register("panelFiltro", panelFiltro);
+		
+		panelAsociar = new PanelAsociarCompetenciasEspecificas();
+		Registry.register("panelAsociar", panelAsociar);
+		
+		panelAsociarBloque = new PanelAsociarCompetenciasEspecificasBloque();
+		Registry.register("panelAsociarBloque", panelAsociarBloque);
+		
+		tbtmAsociarCompetenciasEspecificas.add(panelAsociarBloque);
 		tabPanel.add(tbtmAsociarCompetenciasEspecificas);
 		layoutContainer.add(tabPanel, new BorderLayoutData(LayoutRegion.CENTER));
 		rootPanel.add(layoutContainer);

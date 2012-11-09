@@ -15,6 +15,5 @@ public interface BloquesMateriaServiceAsync{
 
 	public void crearBloquesMateria(String bloque, String materia, AsyncCallback<String> callback);
 	public void eliminarBloquesMateria(String bloque, String materia, AsyncCallback<String> callback);
-	
 
 }
