@@ -2,17 +2,18 @@ package co.edu.unicesi.sama.client.model;
 
 import java.io.Serializable;
 
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
-
 import com.extjs.gxt.ui.client.data.BaseModel;
 
-public class LineaCompetenciaModel extends BaseModel implements Serializable {
-public LineaCompetenciaModel(){
+import co.edu.unicesi.sama.bo.BloqueBO;
+import co.edu.unicesi.sama.bo.CompetenciaTerminalBO;
+
+
+public class CompetenciaTerminalModel extends BaseModel implements Serializable {
+public CompetenciaTerminalModel(){
 		
 	}
 	
-	public LineaCompetenciaModel(int id, String nombre, String descripcion){
+	public CompetenciaTerminalModel(int id, String nombre, String descripcion){
 		
 		 set( "id", id );
 	     set("nombre", nombre);
@@ -50,12 +51,12 @@ public LineaCompetenciaModel(){
     	
     	set ("descripcion", descripcion);
     }
-    public static LineaCompetenciaModel toModelFromBO(LineaCompetenciaBO b)
+    public static CompetenciaTerminalModel toModelFromBO(CompetenciaTerminalBO bo)
     {
-    	LineaCompetenciaModel cModel = new LineaCompetenciaModel( );
-        cModel.setId( b.getIdLineaDeCompetencia());
-        cModel.setNombre( b.getNombre( ) );
-        cModel.setDescripcion(b.getDescripcion());
+    	CompetenciaTerminalModel cModel = new CompetenciaTerminalModel( );
+        cModel.setId( bo.getId_Competencia());
+        cModel.setNombre( bo.getNombre( ) );
+        cModel.setDescripcion(bo.getDescripcion());
         
         return cModel;
     }

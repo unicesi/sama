@@ -32,7 +32,7 @@ public class VentanaPrograma extends Window {
 
 	private ProgramaServiceAsync programaService = GWT.create(ProgramaService.class);
 	TextField txtfldNombrePrograma;
-	NumberField nmbrfldCodigoPrograma;
+	TextField nmbrfldCodigoPrograma;
 	TextArea txtrDescripcionPrograma;
 	private final BusquedaServiceAsync busquedaService = GWT.create(BusquedaService.class);
 	
@@ -65,7 +65,7 @@ public class VentanaPrograma extends Window {
 		add(lblfldCdigo);
 		add(new Text());
 		
-		nmbrfldCodigoPrograma = new NumberField();
+		nmbrfldCodigoPrograma = new TextField();
 		add(nmbrfldCodigoPrograma);
 		nmbrfldCodigoPrograma.setWidth("300px");
 		nmbrfldCodigoPrograma.setFieldLabel("New NumberField");
@@ -122,7 +122,7 @@ public class VentanaPrograma extends Window {
 	private void crearPrograma(){
 		ProgramaBO programa = new ProgramaBO();
 		programa.setNombre(txtfldNombrePrograma.getValue().toString());
-		programa.setIdPrograma(nmbrfldCodigoPrograma.getValue().intValue());
+		programa.setIdPrograma(nmbrfldCodigoPrograma.getValue().toString());
 		programa.setDescripcion(txtrDescripcionPrograma.getValue());
 		programaService.crearPrograma(programa, new AsyncCallback<String>(){
 

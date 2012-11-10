@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 import co.edu.unicesi.sama.bo.BloqueBO;
 
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
-import co.edu.unicesi.sama.bo.MateriaBO;
-import co.edu.unicesi.sama.bo.ProgramaBO;
+
+
+import co.edu.unicesi.sama.bo.*;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -22,7 +21,7 @@ public interface BusquedaServiceAsync {
 	
 	public void buscarMateriaBloquePorBloque(String busqueda, AsyncCallback<ArrayList<MateriaBO>> callback);
 	
-	public void buscarCompetenciaPorPrograma(String busqueda,String programa, AsyncCallback<ArrayList<CompetenciaBO>> callback);
+	public void buscarCompetenciaPorPrograma(String busqueda,String programa, AsyncCallback<ArrayList<CompetenciaTerminalBO>> callback);
 	
-	public void buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias, AsyncCallback<ArrayList<LineaCompetenciaBO>> callback);
+	public void buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias, AsyncCallback<ArrayList<CompetenciaEspecificaBO>> callback);
 }

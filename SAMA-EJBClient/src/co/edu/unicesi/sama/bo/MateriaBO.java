@@ -11,7 +11,7 @@ public class MateriaBO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idMateria;	
+	private String idMateria;	
 
 	private String descripcion;
 
@@ -21,11 +21,11 @@ public class MateriaBO implements Serializable {
 		super();
 	}
 
-	public int getIdMateria() {
+	public String getIdMateria() {
 		return idMateria;
 	}
 
-	public void setIdMateria(int idMateria) {
+	public void setIdMateria(String idMateria) {
 		this.idMateria = idMateria;
 	}
 

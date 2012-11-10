@@ -6,8 +6,8 @@ import javax.ejb.Remote;
 
 import co.edu.unicesi.sama.bo.BloqueBO;
 import co.edu.unicesi.sama.bo.BloquesMateriaPKBO;
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
+import co.edu.unicesi.sama.bo.CompetenciaTerminalBO;
+import co.edu.unicesi.sama.bo.CompetenciaEspecificaBO;
 import co.edu.unicesi.sama.bo.MateriaBO;
 import co.edu.unicesi.sama.bo.ProgramaBO;
 
@@ -22,7 +22,7 @@ public interface BusquedaServiceRemote {
 	
 	public ArrayList<MateriaBO> darMateriasOrdenadosPorNombre(String busqueda);
 
-	public ArrayList<CompetenciaBO> buscarCompetenciaPorPrograma(String busqueda, String programa);
+	public ArrayList<CompetenciaTerminalBO> buscarCompetenciaPorPrograma(String busqueda, String programa);
 	
-	public ArrayList<LineaCompetenciaBO> buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias);
+	public ArrayList<CompetenciaEspecificaBO> buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias);
 }

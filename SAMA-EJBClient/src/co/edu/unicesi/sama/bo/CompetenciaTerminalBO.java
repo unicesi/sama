@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-public class CompetenciaBO implements Serializable{
+public class CompetenciaTerminalBO implements Serializable{
 
 	
 	@Id
@@ -34,7 +34,7 @@ public class CompetenciaBO implements Serializable{
 
 	//bi-directional many-to-one association to Lineadecompetencia
 	@OneToMany(mappedBy="competencia")
-	private Set<LineaCompetenciaBO> lineadecompetencias;
+	private Set<CompetenciaEspecificaBO> lineadecompetencias;
 
 	//bi-directional many-to-many association to Programa
 	@ManyToMany(mappedBy="competencias")
@@ -80,11 +80,11 @@ public class CompetenciaBO implements Serializable{
 		this.tipo = tipo;
 	}
 
-	public Set<LineaCompetenciaBO> getLineadecompetencias() {
+	public Set<CompetenciaEspecificaBO> getLineadecompetencias() {
 		return lineadecompetencias;
 	}
 
-	public void setLineadecompetencias(Set<LineaCompetenciaBO> lineadecompetencias) {
+	public void setLineadecompetencias(Set<CompetenciaEspecificaBO> lineadecompetencias) {
 		this.lineadecompetencias = lineadecompetencias;
 	}
 

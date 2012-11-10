@@ -174,7 +174,7 @@ public class VentanaBloque extends Window {
 	public void asignarPrograma(){
 		
 		this.programa = new ProgramaBO();
-		programa.setIdPrograma((Integer) Registry.get("idPrograma"));
+		programa.setIdPrograma((String) Registry.get("idPrograma"));
 	}
 	
 	private boolean validaCampos() {

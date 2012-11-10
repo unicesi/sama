@@ -33,13 +33,12 @@ public class ManejoBloqueSession  implements ManejoBloqueRemote, ManejoBloqueLoc
 		
 		System.out.println("Entra a crearBloque");
 		Bloque bloq= new Bloque();
-		bloq.setIdBloque(bloque.getIdBloque());
+		
 		bloq.setNombre(bloque.getNombre());
 		bloq.setDescripcion(bloque.getDescripcion());
-		System.out.println("aqui");
-		Programa prog2 = buscarProgramaporID(Integer.parseInt(programa)).get(0);
-		System.out.println("aqui2");
-		System.out.println("Id: " + prog2.getIdPrograma() + " Nombre: " );
+		
+		Programa prog2 = buscarProgramaporID(programa).get(0);
+		
 		bloq.setPrograma(prog2);
 		
 		entityManager.persist(bloq);
@@ -49,7 +48,7 @@ public class ManejoBloqueSession  implements ManejoBloqueRemote, ManejoBloqueLoc
 		
 	}
 	
-	private List<Programa> buscarProgramaporID(int busqueda)
+	private List<Programa> buscarProgramaporID(String busqueda)
 	{
 		try
 		{

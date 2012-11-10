@@ -28,20 +28,18 @@ public class ManejoProgramaSession implements ManejoProgramaRemote, ManejoProgra
 	public String crearPrograma(ProgramaBO programa) throws SamaException {
 		
 		try{
-			System.out.println("Entra a crearPrograma");
+			
 			Programa prog = new Programa();
 			prog.setNombre(programa.getNombre());
-			prog.setIdPrograma(programa.getIdPrograma());
+			prog.setCodigo(programa.getIdPrograma());
 			prog.setDescripcion(programa.getDescripcion());
-			prog.setFacultade(null);
 			
-			System.out.println("MŽtodo crearPrograma del Bean - Nombre: " + 
-			programa.getNombre() + ", ID: " + programa.getIdPrograma() + ", Descripci—n: " + 
-			programa.getDescripcion());
+			
+	
 			if(!entityManager.contains(prog)){
 				
 				entityManager.persist(prog);
-				System.out.println("Pasa el merge");
+				
 				entityManager.flush();
 				return programa.getNombre();
 			}

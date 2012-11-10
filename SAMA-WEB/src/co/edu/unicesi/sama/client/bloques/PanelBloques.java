@@ -280,10 +280,11 @@ public class PanelBloques extends LayoutContainer {
 		
 	}
 
+	//TODO
 	public void asignarPrograma(){
 		
 		this.programa = new ProgramaBO();
-		programa.setIdPrograma((Integer) Registry.get("idPrograma"));
+		programa.setIdPrograma( (String)Registry.get("idPrograma"));
 		actualizarLista();
 	}
 	

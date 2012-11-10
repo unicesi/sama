@@ -10,20 +10,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import co.edu.unicesi.sama.bo.BloqueBO;
-import co.edu.unicesi.sama.bo.BloquesMateriaPKBO;
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-import co.edu.unicesi.sama.bo.CompetenciasprofesionaleBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
-import co.edu.unicesi.sama.bo.MateriaBO;
-import co.edu.unicesi.sama.bo.ProgramaBO;
+
+import co.edu.unicesi.sama.bo.*;
 import co.edu.unicesi.sama.dbutil.DBUtil;
 import co.edu.unicesi.sama.entidades.Bloque;
 
-import co.edu.unicesi.sama.entidades.Competencia;
-import co.edu.unicesi.sama.entidades.Lineadecompetencia;
-import co.edu.unicesi.sama.entidades.Materia;
-import co.edu.unicesi.sama.entidades.Programa;
+
+
+import co.edu.unicesi.sama.entidades.*;
+
 
 /**
  * Session Bean implementation class BusquedaSession
@@ -85,7 +80,7 @@ public class BusquedaSession implements BusquedaServiceRemote, BusquedaServiceLo
 		
 		for (Materia q: materias){
 			for(Materia t: mat){
-				if(t.getIdMateria()==(q.getIdMateria())){
+				if(t.getCodigo().equals(q.getCodigo())){
 					resultado.remove(t);
 				}
 				
@@ -145,21 +140,21 @@ public class BusquedaSession implements BusquedaServiceRemote, BusquedaServiceLo
 	}
 
 	@Override
-	public ArrayList<CompetenciaBO> buscarCompetenciaPorPrograma(String busqueda, String programa ) {
+	public ArrayList<CompetenciaTerminalBO> buscarCompetenciaPorPrograma(String busqueda, String programa ) {
 		// TODO Auto-generated method stub
 		try {
 			
-			TypedQuery<Competencia> query = entityManager
+			TypedQuery<Competenciasterminale> query = entityManager
 					.createNamedQuery("buscarCompetenciaPorTipo",
-							Competencia.class);
+							Competenciasterminale.class);
 			
 			query.setMaxResults(30);
 			
 			query.setParameter("tipo", "%" + busqueda + "%");
 			
-			List<Competencia> list = query.getResultList();
+			List<Competenciasterminale> list = query.getResultList();
 			
-			ArrayList<CompetenciaBO> retorno = new ArrayList<CompetenciaBO>();
+			ArrayList<CompetenciaTerminalBO> retorno = new ArrayList<CompetenciaTerminalBO>();
 			
 			
 			
@@ -167,15 +162,15 @@ public class BusquedaSession implements BusquedaServiceRemote, BusquedaServiceLo
 
 			if (list.size() > 0) {
 				
-				for (Competencia p : list) {
+				for (Competenciasterminale p : list) {
 					boolean contiene=false;
 					for (Programa t: p.getProgramas()){
-						if(t.getIdPrograma()==Integer.parseInt(programa)){
+						if(t.getCodigo().equals(programa)){
 							contiene=true;
 						}
 						
 					}
-					CompetenciaBO Bo=p.toBO();
+					CompetenciaTerminalBO Bo=p.toBO();
 					if(contiene){
 						retorno.add(Bo);
 					}
@@ -195,21 +190,21 @@ public class BusquedaSession implements BusquedaServiceRemote, BusquedaServiceLo
 	}
 
 	@Override
-	public ArrayList<LineaCompetenciaBO> buscarLineaDeCompetenciaPorCompetencia(
+	public ArrayList<CompetenciaEspecificaBO> buscarLineaDeCompetenciaPorCompetencia(
 			String programa, String competencias) {
 try {
 	System.out.println("entrando a buscar Linea de competencia");
-			TypedQuery<Lineadecompetencia> query = entityManager
+			TypedQuery<Competenciasespecifica> query = entityManager
 					.createNamedQuery("buscarLineaDeCompetenciaPorCompetencia",
-							Lineadecompetencia.class);
+							Competenciasespecifica.class);
 			
 			query.setMaxResults(30);
 			
 			query.setParameter("id", "%" + competencias + "%");
 			
-			List<Lineadecompetencia> list = query.getResultList();
+			List<Competenciasespecifica> list = query.getResultList();
 			
-			ArrayList<LineaCompetenciaBO> retorno = new ArrayList<LineaCompetenciaBO>();
+			ArrayList<CompetenciaEspecificaBO> retorno = new ArrayList<CompetenciaEspecificaBO>();
 			
 			
 			System.out.println("tamaño Lista linea de comeptencia"+list.size());
@@ -217,10 +212,10 @@ try {
 
 			if (list.size() > 0) {
 				
-				for (Lineadecompetencia p : list) {
+				for (Competenciasespecifica p : list) {
 					boolean asociado=false;
 					for (Programa q:p.getProgramas()){
-						if(q.getIdPrograma()==Integer.parseInt(programa)){
+						if(q.getCodigo().equals(programa)){
 							asociado=true;
 						}
 					}
@@ -232,7 +227,7 @@ try {
 //							asociado=true;
 //						}
 //					}
-					LineaCompetenciaBO Bo=p.toBO();
+					CompetenciaEspecificaBO Bo=p.toBO();
 					
 					Bo.setAsociado(asociado);
 					retorno.add(Bo);

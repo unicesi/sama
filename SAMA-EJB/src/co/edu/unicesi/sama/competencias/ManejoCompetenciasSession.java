@@ -7,16 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import co.edu.unicesi.sama.bo.BloqueBO;
-import co.edu.unicesi.sama.bo.BloquesMateriaPKBO;
-import co.edu.unicesi.sama.bo.MateriaBO;
-import co.edu.unicesi.sama.bo.ProgramaBO;
-import co.edu.unicesi.sama.dbutil.DBUtil;
-import co.edu.unicesi.sama.entidades.Bloque;
+import co.edu.unicesi.sama.bo.*;
 
-import co.edu.unicesi.sama.entidades.Lineadecompetencia;
-import co.edu.unicesi.sama.entidades.Materia;
-import co.edu.unicesi.sama.entidades.Programa;
+import co.edu.unicesi.sama.dbutil.DBUtil;
+
+
+import co.edu.unicesi.sama.entidades.*;
+
+
 import co.edu.unicesi.sama.exception.SamaException;
 
 /**
@@ -44,19 +42,19 @@ public class ManejoCompetenciasSession implements ManejoCompetenciasRemote, Mane
 		
 		try{
 		// TODO Auto-generated method stub
-		TypedQuery<Lineadecompetencia> respProgramas = entityManager.createNamedQuery(
-				"buscarLineaDeCompetenciaPorIdLinea", Lineadecompetencia.class);
+		TypedQuery<Competenciasespecifica> respProgramas = entityManager.createNamedQuery(
+				"buscarLineaDeCompetenciaPorIdLinea", Competenciasespecifica.class);
 		respProgramas.setParameter("id", "%"+Integer.parseInt(linea)+ "%");
-		List<Lineadecompetencia> lineas = respProgramas.getResultList();
+		List<Competenciasespecifica> lineas = respProgramas.getResultList();
 		
 		
 		TypedQuery<Programa> respProgramas2 = entityManager.createNamedQuery(
 				"buscarProgramaporId", Programa.class);
-		respProgramas2.setParameter("programa", "%"+ Integer.parseInt(programa) + "%");
+		respProgramas2.setParameter("programa", "%"+ programa + "%");
 		List<Programa> programas = respProgramas2.getResultList();
 		
 		
-		Lineadecompetencia lineaObj=lineas.get(0);
+		Competenciasespecifica lineaObj=lineas.get(0);
 		Programa progObj=programas.get(0);
 		
 		String retorno="";
@@ -96,19 +94,19 @@ public class ManejoCompetenciasSession implements ManejoCompetenciasRemote, Mane
 		// TODO Auto-generated method stub
 
 		try{		
-			TypedQuery<Lineadecompetencia> respProgramas = entityManager.createNamedQuery(
-					"buscarLineaDeCompetenciaPorIdLinea", Lineadecompetencia.class);
+			TypedQuery<Competenciasespecifica> respProgramas = entityManager.createNamedQuery(
+					"buscarLineaDeCompetenciaPorIdLinea", Competenciasespecifica.class);
 			respProgramas.setParameter("id", "%"+Integer.parseInt(linea)+ "%");
-			List<Lineadecompetencia> lineas = respProgramas.getResultList();
+			List<Competenciasespecifica> lineas = respProgramas.getResultList();
 			
 			
 			TypedQuery<Programa> respProgramas2 = entityManager.createNamedQuery(
 					"buscarProgramaporId", Programa.class);
-			respProgramas2.setParameter("programa", "%"+ Integer.parseInt(programa) + "%");
+			respProgramas2.setParameter("programa", "%"+ programa + "%");
 			List<Programa> programas = respProgramas2.getResultList();
 			
 			
-			Lineadecompetencia lineaObj=lineas.get(0);
+			Competenciasespecifica lineaObj=lineas.get(0);
 			Programa progObj=programas.get(0);
 			
 			String retorno="";

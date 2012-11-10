@@ -15,7 +15,7 @@ public class ProgramaBO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idPrograma;
+	private String idPrograma;
 
 	private String descripcion;
 
@@ -24,11 +24,11 @@ public class ProgramaBO implements Serializable {
     public ProgramaBO() {
     }
 
-	public int getIdPrograma() {
+	public String getIdPrograma() {
 		return this.idPrograma;
 	}
 
-	public void setIdPrograma(int idPrograma) {
+	public void setIdPrograma(String idPrograma) {
 		this.idPrograma = idPrograma;
 	}
 

@@ -52,7 +52,7 @@ public class ManejoBloquesMateriaSession implements ManejoBloquesMateriaRemote, 
 			
 			TypedQuery<Materia> respProgramas2 = entityManager.createNamedQuery(
 					"buscarMateriaPorId", Materia.class);
-			respProgramas2.setParameter("id", "%"+ Integer.parseInt(materia) + "%");
+			respProgramas2.setParameter("id", "%"+(materia) + "%");
 			List<Materia> materias = respProgramas2.getResultList();
 			
 			
@@ -99,7 +99,7 @@ public class ManejoBloquesMateriaSession implements ManejoBloquesMateriaRemote, 
 			
 			TypedQuery<Materia> respProgramas2 = entityManager.createNamedQuery(
 					"buscarMateriaPorId", Materia.class);
-			respProgramas2.setParameter("id", "%"+ Integer.parseInt(materia) + "%");
+			respProgramas2.setParameter("id", "%"+ materia + "%");
 			List<Materia> materias = respProgramas2.getResultList();
 			
 			

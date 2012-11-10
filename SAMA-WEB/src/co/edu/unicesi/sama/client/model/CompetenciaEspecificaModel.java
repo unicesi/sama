@@ -2,17 +2,17 @@ package co.edu.unicesi.sama.client.model;
 
 import java.io.Serializable;
 
+
+import co.edu.unicesi.sama.bo.CompetenciaEspecificaBO;
+
 import com.extjs.gxt.ui.client.data.BaseModel;
 
-import co.edu.unicesi.sama.bo.BloqueBO;
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-
-public class CompetenciaModel extends BaseModel implements Serializable {
-public CompetenciaModel(){
+public class CompetenciaEspecificaModel extends BaseModel implements Serializable {
+public CompetenciaEspecificaModel(){
 		
 	}
 	
-	public CompetenciaModel(int id, String nombre, String descripcion){
+	public CompetenciaEspecificaModel(int id, String nombre, String descripcion){
 		
 		 set( "id", id );
 	     set("nombre", nombre);
@@ -50,12 +50,12 @@ public CompetenciaModel(){
     	
     	set ("descripcion", descripcion);
     }
-    public static CompetenciaModel toModelFromBO(CompetenciaBO bo)
+    public static CompetenciaEspecificaModel toModelFromBO(CompetenciaEspecificaBO b)
     {
-        CompetenciaModel cModel = new CompetenciaModel( );
-        cModel.setId( bo.getId_Competencia());
-        cModel.setNombre( bo.getNombre( ) );
-        cModel.setDescripcion(bo.getDescripcion());
+    	CompetenciaEspecificaModel cModel = new CompetenciaEspecificaModel( );
+        cModel.setId( b.getIdLineaDeCompetencia());
+        cModel.setNombre( b.getNombre( ) );
+        cModel.setDescripcion(b.getDescripcion());
         
         return cModel;
     }

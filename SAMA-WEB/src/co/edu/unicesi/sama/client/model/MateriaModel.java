@@ -21,9 +21,9 @@ public class MateriaModel extends BaseModel implements Serializable{
 		
 	}
 	
-    public int getId( )
+    public String getId( )
     {
-        return (Integer) get("id");
+        return (String) get("id");
     }
     
     public String getNombre( )
@@ -31,7 +31,7 @@ public class MateriaModel extends BaseModel implements Serializable{
         return (String) get( "nombre" );
     }    
     
-    public void setId( int id )
+    public void setId( String id )
     {
         set("id", id);
     }

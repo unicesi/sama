@@ -1,11 +1,7 @@
 package co.edu.unicesi.sama.client.competencias;
 
-import co.edu.unicesi.sama.bo.BloqueBO;
-import co.edu.unicesi.sama.bo.BloquesMateriaPKBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
-import co.edu.unicesi.sama.bo.MateriaBO;
-import co.edu.unicesi.sama.bo.ProgramaBO;
-import co.edu.unicesi.sama.bo.CompetenciaBO;
+import co.edu.unicesi.sama.bo.*;
+
 import co.edu.unicesi.sama.client.bloqueMaterias.BloquesMateriaService;
 import co.edu.unicesi.sama.client.bloqueMaterias.BloquesMateriaServiceAsync;
 import co.edu.unicesi.sama.client.busqueda.BusquedaService;
@@ -13,8 +9,9 @@ import co.edu.unicesi.sama.client.busqueda.BusquedaServiceAsync;
 import co.edu.unicesi.sama.client.busqueda.ListaProgramas;
 import co.edu.unicesi.sama.client.controller.DTEvent;
 import co.edu.unicesi.sama.client.model.BloqueModel;
-import co.edu.unicesi.sama.client.model.CompetenciaModel;
-import co.edu.unicesi.sama.client.model.LineaCompetenciaModel;
+
+import co.edu.unicesi.sama.client.model.CompetenciaTerminalModel;
+import co.edu.unicesi.sama.client.model.CompetenciaEspecificaModel;
 import co.edu.unicesi.sama.client.model.MateriaModel;
 import co.edu.unicesi.sama.client.model.ProgramaModel;
 
@@ -63,9 +60,9 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 	private final CompetenciasServiceAsync competenciasService = GWT.create(CompetenciasService.class);
 	private ProgramaBO programa;
 	
-	private Grid<CompetenciaModel> grid;
-	private Grid<LineaCompetenciaModel> gridAsociadas;
-	private Grid<LineaCompetenciaModel> gridNoAsociadas;
+	private Grid<CompetenciaTerminalModel> grid;
+	private Grid<CompetenciaEspecificaModel> gridAsociadas;
+	private Grid<CompetenciaEspecificaModel> gridNoAsociadas;
 	private Button btnQuitarLinea;
 	private Button btnAgregarLinea;
 	public static ArrayList<MateriaBO> materiasAsociadas;
@@ -84,7 +81,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 		add(new Text());
 		add(new Text());
 		add(new Text());
-		grid = new Grid<CompetenciaModel>(new ListStore<CompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		grid = new Grid<CompetenciaTerminalModel>(new ListStore<CompetenciaTerminalModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		Registry.register("gridBloques", grid);
 		TableData td_grid = new TableData();
 		td_grid.setColspan(3);
@@ -150,7 +147,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 		add(new Text());
 		add(new Text());
 		
-		gridNoAsociadas = new Grid<LineaCompetenciaModel>(new ListStore<LineaCompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		gridNoAsociadas = new Grid<CompetenciaEspecificaModel>(new ListStore<CompetenciaEspecificaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		Registry.register("gridNoAsociadas", gridNoAsociadas);
 		add(gridNoAsociadas);
 		gridNoAsociadas.setSize("315", "147");
@@ -241,7 +238,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 		add(layoutContainer);
 		layoutContainer.setSize("87px", "138px");
 		
-		gridAsociadas = new Grid<LineaCompetenciaModel>(new ListStore<LineaCompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		gridAsociadas = new Grid<CompetenciaEspecificaModel>(new ListStore<CompetenciaEspecificaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		add(gridAsociadas);
 		gridAsociadas.setSize("315", "147");
 		gridAsociadas.setBorders(true);
@@ -262,7 +259,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 	private void actualizarLista(){
 		
 		
-		busquedaService.buscarCompetenciaPorPrograma("2", String.valueOf(programa.getIdPrograma()),new AsyncCallback<ArrayList<CompetenciaBO>> (){
+		busquedaService.buscarCompetenciaPorPrograma("2", String.valueOf(programa.getIdPrograma()),new AsyncCallback<ArrayList<CompetenciaTerminalBO>> (){
 			@Override
 			public void onFailure(Throwable arg0) {
 				// TODO Auto-generated method stub
@@ -270,7 +267,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 			}
 
 			@Override
-			public void onSuccess(ArrayList<CompetenciaBO> result) {
+			public void onSuccess(ArrayList<CompetenciaTerminalBO> result) {
 				// TODO Auto-generated method stub
 				
 				
@@ -283,7 +280,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 	public void asignarPrograma(){
 		
 		this.programa = new ProgramaBO();
-		programa.setIdPrograma((Integer) Registry.get("idPrograma"));
+		programa.setIdPrograma((String) Registry.get("idPrograma"));
 		actualizarLista();
 	}
 	
@@ -326,19 +323,19 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 	
 	
 	
-	public void actualizarListaLineas(ListStore<CompetenciaModel> lista){
+	public void actualizarListaLineas(ListStore<CompetenciaTerminalModel> lista){
 
 		if(lista!=null){
 			
 			grid.reconfigure(lista, getColumnModel());			
 		}else{
 			
-			grid.reconfigure(new ListStore<CompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+			grid.reconfigure(new ListStore<CompetenciaTerminalModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		}
 	}
 	
 	
-	public void actualizarListaCompetenciasAsociadas(ListStore<LineaCompetenciaModel> listaAsociados){
+	public void actualizarListaCompetenciasAsociadas(ListStore<CompetenciaEspecificaModel> listaAsociados){
 		
 		
 		if(listaAsociados != null){
@@ -348,13 +345,13 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 //			gridAsociadas.getStore().getLoader().load();
 		}else{
 			
-			gridAsociadas.reconfigure(new ListStore<LineaCompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+			gridAsociadas.reconfigure(new ListStore<CompetenciaEspecificaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		//	gridAsociadas = new Grid<MateriaModel>(asociadas,getColumnModelMaterias());
 
 		}
 	}
 	
-	public void actualziarListaCompetenciasNoAsociadas(ListStore<LineaCompetenciaModel> noAsociadas){
+	public void actualziarListaCompetenciasNoAsociadas(ListStore<CompetenciaEspecificaModel> noAsociadas){
 		
 		
 		if(noAsociadas != null){
@@ -364,18 +361,18 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 //			gridAsociadas.getStore().getLoader().load();
 		}else{
 			
-			gridNoAsociadas.reconfigure(new ListStore<LineaCompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+			gridNoAsociadas.reconfigure(new ListStore<CompetenciaEspecificaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		//	gridAsociadas = new Grid<MateriaModel>(asociadas,getColumnModelMaterias());
 
 		}
 	}
 	 void eventoSeleccionarCompetenciaTransversal(){
 		
-		grid.addListener(Events.CellClick, new Listener<GridEvent<CompetenciaModel>>(){
+		grid.addListener(Events.CellClick, new Listener<GridEvent<CompetenciaTerminalModel>>(){
 
 			@Override
-			public void handleEvent(GridEvent<CompetenciaModel> be) {
-				CompetenciaModel pM = be.getGrid().getSelectionModel().getSelectedItem();
+			public void handleEvent(GridEvent<CompetenciaTerminalModel> be) {
+				CompetenciaTerminalModel pM = be.getGrid().getSelectionModel().getSelectedItem();
 				Dispatcher.forwardEvent(DTEvent.SELECCIONAR_COMPETENCIA_TRANSVERSAL, pM);
 				
 			}
@@ -387,7 +384,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 	public void cargarLineasProf(){
 		
 		
-		busquedaService.buscarLineaDeCompetenciaPorCompetencia(Registry.get("idPrograma")+"", Registry.get("idCompetenciaTransversal")+"", new AsyncCallback<ArrayList<LineaCompetenciaBO>>() {
+		busquedaService.buscarLineaDeCompetenciaPorCompetencia(Registry.get("idPrograma")+"", Registry.get("idCompetenciaTransversal")+"", new AsyncCallback<ArrayList<CompetenciaEspecificaBO>>() {
 
 			@Override
 			public void onFailure(Throwable arg0) {
@@ -397,7 +394,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 			}
 
 			@Override
-			public void onSuccess(ArrayList<LineaCompetenciaBO> result) {
+			public void onSuccess(ArrayList<CompetenciaEspecificaBO> result) {
 				
 				
 				if(result != null){
@@ -414,12 +411,12 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 	
 	private void eventoSeleccionarLineaNoAsociada(){
 		
-		gridNoAsociadas.addListener(Events.CellClick, new Listener<GridEvent<LineaCompetenciaModel>>(){
+		gridNoAsociadas.addListener(Events.CellClick, new Listener<GridEvent<CompetenciaEspecificaModel>>(){
 
 			@Override
-			public void handleEvent(GridEvent<LineaCompetenciaModel> be) {
+			public void handleEvent(GridEvent<CompetenciaEspecificaModel> be) {
 				System.out.println("eventoNoasociadaLinea");
-				LineaCompetenciaModel pM = be.getGrid().getSelectionModel().getSelectedItem();
+				CompetenciaEspecificaModel pM = be.getGrid().getSelectionModel().getSelectedItem();
 				Registry.register("lineaNoAsociada",pM);
 				Registry.register("idLineaNoAsociada", pM.getId());
 				btnAgregarLinea.setEnabled(true);
@@ -431,12 +428,12 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 	
 	private void eventoSeleccionarLineaAsociada(){
 		
-		gridAsociadas.addListener(Events.CellClick, new Listener<GridEvent<LineaCompetenciaModel>>(){
+		gridAsociadas.addListener(Events.CellClick, new Listener<GridEvent<CompetenciaEspecificaModel>>(){
 
 			@Override
-			public void handleEvent(GridEvent<LineaCompetenciaModel> be) {
+			public void handleEvent(GridEvent<CompetenciaEspecificaModel> be) {
 				System.out.println("eventoasociadaLinea");
-				LineaCompetenciaModel pM = be.getGrid().getSelectionModel().getSelectedItem();
+				CompetenciaEspecificaModel pM = be.getGrid().getSelectionModel().getSelectedItem();
 				Registry.register("lineaAsociada",pM);
 				Registry.register("idLineaAsociada",pM.getId());
 				btnQuitarLinea.setEnabled(true);	
@@ -510,8 +507,8 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 
 	public void limpiar() {
 		// TODO Auto-generated method stub
-		gridAsociadas.reconfigure(new ListStore<LineaCompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
-		gridNoAsociadas.reconfigure(new ListStore<LineaCompetenciaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		gridAsociadas.reconfigure(new ListStore<CompetenciaEspecificaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		gridNoAsociadas.reconfigure(new ListStore<CompetenciaEspecificaModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		
 	}
 

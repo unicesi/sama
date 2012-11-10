@@ -173,7 +173,7 @@ public class PanelProgramas extends LayoutContainer {
 	private void crearPrograma(){
 		ProgramaBO programa = new ProgramaBO();
 		programa.setNombre(txtfldNombrePrograma.getValue().toString());
-		programa.setIdPrograma(nmbrfldCodigoPrograma.getValue().intValue());
+		programa.setIdPrograma(nmbrfldCodigoPrograma.getValue().toString());
 		programa.setDescripcion(txtrDescripcion.getValue());
 		programaService.crearPrograma(programa, new AsyncCallback<String>(){
 

@@ -31,20 +31,17 @@ public class ManejoMateriaSession implements ManejoMateriaRemote,
 	@Override
 	public String crearMateria(MateriaBO materia) throws SamaException {
 		try {
-			System.out.println("Entra a crearMateria");
+			
 			Materia mat = new Materia();
 			mat.setNombre(materia.getNombre());
-			mat.setIdMateria(materia.getIdMateria());
+			mat.setCodigo(materia.getIdMateria());
 			mat.setDescripcion(materia.getDescripcion());
-			mat.setFacultade(null);
+			
 
-			System.out.println("MŽtodo crearMateria del Bean - Nombre: "
-					+ materia.getNombre() + ", ID: " + materia.getIdMateria()
-					+ ", Descripci—n: " + materia.getDescripcion());
 			if(!entityManager.contains(mat)){
 				
 				entityManager.persist(mat);
-				System.out.println("Pasa el merge");
+				
 				entityManager.flush();
 				return materia.getNombre();		
 			}

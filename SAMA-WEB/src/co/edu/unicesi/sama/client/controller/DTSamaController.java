@@ -3,8 +3,10 @@ package co.edu.unicesi.sama.client.controller;
 import java.util.ArrayList;
 
 import co.edu.unicesi.sama.bo.BloqueBO;
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
+
+
+import co.edu.unicesi.sama.bo.CompetenciaTerminalBO;
+import co.edu.unicesi.sama.bo.CompetenciaEspecificaBO;
 import co.edu.unicesi.sama.bo.MateriaBO;
 import co.edu.unicesi.sama.bo.ProgramaBO;
 import co.edu.unicesi.sama.client.bloques.PanelBloques;
@@ -13,8 +15,8 @@ import co.edu.unicesi.sama.client.busqueda.ListaProgramas;
 import co.edu.unicesi.sama.client.competencias.PanelCompetenciasProfesionales;
 import co.edu.unicesi.sama.client.competencias.PanelCompetenciasTransversales;
 import co.edu.unicesi.sama.client.model.BloqueModel;
-import co.edu.unicesi.sama.client.model.CompetenciaModel;
-import co.edu.unicesi.sama.client.model.LineaCompetenciaModel;
+import co.edu.unicesi.sama.client.model.CompetenciaTerminalModel;
+import co.edu.unicesi.sama.client.model.CompetenciaEspecificaModel;
 import co.edu.unicesi.sama.client.model.MateriaModel;
 import co.edu.unicesi.sama.client.model.ProgramaModel;
 
@@ -120,16 +122,16 @@ public class DTSamaController extends Controller{
 
 					if(event.getType().equals(DTEvent.REFRESCAR_COMPETENCIAS_PROFESIONALES)){
 
-						ArrayList<CompetenciaBO> competencias = (ArrayList<CompetenciaBO>)event.getData();
+						ArrayList<CompetenciaTerminalBO> competencias = (ArrayList<CompetenciaTerminalBO>)event.getData();
 
-						ListStore<CompetenciaModel> lista = new ListStore<CompetenciaModel>();
+						ListStore<CompetenciaTerminalModel> lista = new ListStore<CompetenciaTerminalModel>();
 
 						if(competencias!=null){
 
-							for(CompetenciaBO b:competencias){
+							for(CompetenciaTerminalBO b:competencias){
 
 
-								lista.add(CompetenciaModel.toModelFromBO(b));
+								lista.add(CompetenciaTerminalModel.toModelFromBO(b));
 
 							}
 
@@ -146,16 +148,16 @@ public class DTSamaController extends Controller{
 						
 						if(event.getType().equals(DTEvent.REFRESCAR_COMPETENCIAS_TRANSVERSALES)){
 
-							ArrayList<CompetenciaBO> competencias = (ArrayList<CompetenciaBO>)event.getData();
+							ArrayList<CompetenciaTerminalBO> competencias = (ArrayList<CompetenciaTerminalBO>)event.getData();
 
-							ListStore<CompetenciaModel> lista = new ListStore<CompetenciaModel>();
+							ListStore<CompetenciaTerminalModel> lista = new ListStore<CompetenciaTerminalModel>();
 
 							if(competencias!=null){
 
-								for(CompetenciaBO b:competencias){
+								for(CompetenciaTerminalBO b:competencias){
 
 
-									lista.add(CompetenciaModel.toModelFromBO(b));
+									lista.add(CompetenciaTerminalModel.toModelFromBO(b));
 
 								}
 
@@ -184,7 +186,7 @@ public class DTSamaController extends Controller{
 
 							if(event.getType().equals(DTEvent.SELECCIONAR_COMPETENCIA_PROFESIONAL)){
 								
-								CompetenciaModel model =(CompetenciaModel)event.getData();
+								CompetenciaTerminalModel model =(CompetenciaTerminalModel)event.getData();
 								System.out.println("llamando evento selecionar comp profesional" + model.getId());
 								Registry.register( "idCompetenciaProfesional", model.getId());
 
@@ -196,7 +198,7 @@ public class DTSamaController extends Controller{
 								
 								if(event.getType().equals(DTEvent.SELECCIONAR_COMPETENCIA_TRANSVERSAL)){
 									
-									CompetenciaModel model =(CompetenciaModel)event.getData();
+									CompetenciaTerminalModel model =(CompetenciaTerminalModel)event.getData();
 									System.out.println("llamando evento selecionar comp profesional" + model.getId());
 									Registry.register( "idCompetenciaTransversal", model.getId());
 
@@ -261,21 +263,21 @@ public class DTSamaController extends Controller{
 									}else{
 										if(event.getType().equals(DTEvent.REFRESCAR_LINEA_PROFESIONAL)){
 											System.out.println("entrando a refrescar linea profesional");
-											ArrayList<LineaCompetenciaBO> lineas = (ArrayList<LineaCompetenciaBO>)event.getData();
+											ArrayList<CompetenciaEspecificaBO> lineas = (ArrayList<CompetenciaEspecificaBO>)event.getData();
 
-											ListStore<LineaCompetenciaModel> listaAsociados = new ListStore<LineaCompetenciaModel>();
-											ListStore<LineaCompetenciaModel> listaNoAsociados = new ListStore<LineaCompetenciaModel>();
+											ListStore<CompetenciaEspecificaModel> listaAsociados = new ListStore<CompetenciaEspecificaModel>();
+											ListStore<CompetenciaEspecificaModel> listaNoAsociados = new ListStore<CompetenciaEspecificaModel>();
 											
-											for(LineaCompetenciaBO b:lineas){
+											for(CompetenciaEspecificaBO b:lineas){
 												System.out.println(b.getIdLineaDeCompetencia()+"-"+String.valueOf(b.isAsociado()));
 												
 											}
 											if(lineas!=null){
-												for(LineaCompetenciaBO b:lineas){
+												for(CompetenciaEspecificaBO b:lineas){
 													if(b.isAsociado()){
-														listaAsociados.add(LineaCompetenciaModel.toModelFromBO(b));
+														listaAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
 													}else{
-														listaNoAsociados.add(LineaCompetenciaModel.toModelFromBO(b));
+														listaNoAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
 													}
 													
 
@@ -297,18 +299,18 @@ public class DTSamaController extends Controller{
 										
 										if(event.getType().equals(DTEvent.REFRESCAR_LINEA_TRANSVERSAL)){
 											
-											ArrayList<LineaCompetenciaBO> lineas = (ArrayList<LineaCompetenciaBO>)event.getData();
+											ArrayList<CompetenciaEspecificaBO> lineas = (ArrayList<CompetenciaEspecificaBO>)event.getData();
 
-											ListStore<LineaCompetenciaModel> listaAsociados = new ListStore<LineaCompetenciaModel>();
-											ListStore<LineaCompetenciaModel> listaNoAsociados = new ListStore<LineaCompetenciaModel>();
+											ListStore<CompetenciaEspecificaModel> listaAsociados = new ListStore<CompetenciaEspecificaModel>();
+											ListStore<CompetenciaEspecificaModel> listaNoAsociados = new ListStore<CompetenciaEspecificaModel>();
 											
 										
 											if(lineas!=null){
-												for(LineaCompetenciaBO b:lineas){
+												for(CompetenciaEspecificaBO b:lineas){
 													if(b.isAsociado()){
-														listaAsociados.add(LineaCompetenciaModel.toModelFromBO(b));
+														listaAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
 													}else{
-														listaNoAsociados.add(LineaCompetenciaModel.toModelFromBO(b));
+														listaNoAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
 													}
 													
 

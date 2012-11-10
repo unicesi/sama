@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 import co.edu.unicesi.sama.bo.BloqueBO;
 
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
-import co.edu.unicesi.sama.bo.MateriaBO;
-import co.edu.unicesi.sama.bo.ProgramaBO;
+
+
+import co.edu.unicesi.sama.bo.*;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -25,7 +24,7 @@ public interface BusquedaService extends RemoteService {
 	
 	public ArrayList<MateriaBO> buscarMateriaBloquePorBloque(String busqueda);
 	
-	public ArrayList<CompetenciaBO> buscarCompetenciaPorPrograma(String busqueda,String programa);
+	public ArrayList<CompetenciaTerminalBO> buscarCompetenciaPorPrograma(String busqueda,String programa);
 	
-	public ArrayList<LineaCompetenciaBO> buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias);
+	public ArrayList<CompetenciaEspecificaBO> buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias);
 }

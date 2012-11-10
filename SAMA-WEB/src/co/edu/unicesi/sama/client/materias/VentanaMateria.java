@@ -30,7 +30,7 @@ public class VentanaMateria extends Window {
 
 	private MateriaServiceAsync materiaService = GWT.create(MateriaService.class);
 	TextField txtfldNombreMateria;
-	NumberField nmbrfldCodigoMateria;
+	TextField nmbrfldCodigoMateria;
 	TextArea txtrDescripcionMateria;
 	
 	public VentanaMateria() {
@@ -62,7 +62,7 @@ public class VentanaMateria extends Window {
 		add(lblfldCdigo);
 		add(new Text());
 		
-		nmbrfldCodigoMateria = new NumberField();
+		nmbrfldCodigoMateria = new TextField();
 		add(nmbrfldCodigoMateria);
 		nmbrfldCodigoMateria.setWidth("300px");
 		nmbrfldCodigoMateria.setFieldLabel("New NumberField");
@@ -121,7 +121,7 @@ public class VentanaMateria extends Window {
 		if(validaCampos()){
 		MateriaBO materia = new MateriaBO();
 		materia.setNombre(txtfldNombreMateria.getValue().toString());
-		materia.setIdMateria(nmbrfldCodigoMateria.getValue().intValue());
+		materia.setIdMateria(nmbrfldCodigoMateria.getValue().toString());
 		materia.setDescripcion(txtrDescripcionMateria.getValue());
 		materiaService.crearMateria(materia, new AsyncCallback<String>(){
 

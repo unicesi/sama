@@ -8,8 +8,10 @@ import javax.naming.NamingException;
 
 import co.edu.unicesi.sama.bo.BloqueBO;
 import co.edu.unicesi.sama.bo.BloquesMateriaPKBO;
-import co.edu.unicesi.sama.bo.CompetenciaBO;
-import co.edu.unicesi.sama.bo.LineaCompetenciaBO;
+
+import co.edu.unicesi.sama.bo.CompetenciaEspecificaBO;
+import co.edu.unicesi.sama.bo.CompetenciaTerminalBO;
+
 import co.edu.unicesi.sama.bo.MateriaBO;
 import co.edu.unicesi.sama.bo.ProgramaBO;
 import co.edu.unicesi.sama.busqueda.BusquedaServiceRemote;
@@ -95,11 +97,11 @@ public class BusquedaServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public ArrayList<CompetenciaBO> buscarCompetenciaPorPrograma(String busqueda, String programa) {
+	public ArrayList<CompetenciaTerminalBO> buscarCompetenciaPorPrograma(String busqueda, String programa) {
 		// TODO Auto-generated method stub
 	try{
 			
-			return (ArrayList<CompetenciaBO>) busquedaRemote.buscarCompetenciaPorPrograma(busqueda, programa);
+			return (ArrayList<CompetenciaTerminalBO>) busquedaRemote.buscarCompetenciaPorPrograma(busqueda, programa);
 		}catch(Exception e){
 			
 			return null;
@@ -107,15 +109,16 @@ public class BusquedaServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public ArrayList<LineaCompetenciaBO> buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias) {
+	public ArrayList<CompetenciaEspecificaBO> buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias) {
 try{
 			
-			return (ArrayList<LineaCompetenciaBO>) busquedaRemote.buscarLineaDeCompetenciaPorCompetencia(programa, competencias);
+			return (ArrayList<CompetenciaEspecificaBO>) busquedaRemote.buscarLineaDeCompetenciaPorCompetencia(programa, competencias);
 		}catch(Exception e){
 			
 			return null;
 		}
 	}
+
 
 
 

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 
 
-public class LineaCompetenciaBO implements Serializable {
+public class CompetenciaEspecificaBO implements Serializable {
 	private int idLineaDeCompetencia;
 
 	private String descripcion;
@@ -52,11 +52,11 @@ public class LineaCompetenciaBO implements Serializable {
 		this.asociado = asociado;
 	}
 
-	public CompetenciaBO getCompetencia() {
+	public CompetenciaTerminalBO getCompetencia() {
 		return competencia;
 	}
 
-	public void setCompetencia(CompetenciaBO competencia) {
+	public void setCompetencia(CompetenciaTerminalBO competencia) {
 		this.competencia = competencia;
 	}
 
@@ -71,7 +71,7 @@ public class LineaCompetenciaBO implements Serializable {
 	//bi-directional many-to-one association to Competencia
     @ManyToOne
 	@JoinColumn(name="idCompetencia")
-	private CompetenciaBO competencia;
+	private CompetenciaTerminalBO competencia;
 
 	//bi-directional many-to-many association to Programa
     @ManyToMany
