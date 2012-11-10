@@ -36,7 +36,6 @@ public class VentanaBloque extends Window {
 
 	private BloqueServiceAsync bloqueService = GWT.create(BloqueService.class);
 	TextField txtfldNombreBloque;
-	NumberField nmbrfldCodigoBloque;
 	TextArea txtrDescripcionBloque;
 	private final BusquedaServiceAsync busquedaService = GWT.create(BusquedaService.class);
 	private ProgramaBO programa;
@@ -64,16 +63,6 @@ public class VentanaBloque extends Window {
 		
 		HiddenField hiddenField_1 = new HiddenField();
 		add(hiddenField_1);
-		add(new Text());
-		
-		LabelField lblfldCdigo = new LabelField("C\u00F3digo");
-		add(lblfldCdigo);
-		add(new Text());
-		
-		nmbrfldCodigoBloque = new NumberField();
-		add(nmbrfldCodigoBloque);
-		nmbrfldCodigoBloque.setWidth("300px");
-		nmbrfldCodigoBloque.setFieldLabel("New NumberField");
 		add(new Text());
 		add(new Text());
 		add(new Text());
@@ -128,7 +117,6 @@ public class VentanaBloque extends Window {
 		if(validaCampos()){
 		BloqueBO bloque = new BloqueBO();
 		bloque.setNombre(txtfldNombreBloque.getValue().toString());
-		bloque.setIdBloque(nmbrfldCodigoBloque.getValue().intValue());
 		bloque.setDescripcion(txtrDescripcionBloque.getValue());
 		bloqueService.crearBloque(""+programa.getIdPrograma(), bloque, new AsyncCallback<String>(){
 
@@ -138,7 +126,6 @@ public class VentanaBloque extends Window {
 				Info.display("Crear Bloque", "No se pudo crear el bloque");
 				txtfldNombreBloque.clear();
 				txtrDescripcionBloque.clear();
-				nmbrfldCodigoBloque.clear();
 				
 			}
 
@@ -150,7 +137,7 @@ public class VentanaBloque extends Window {
 			
 				txtfldNombreBloque.clear();
 				txtrDescripcionBloque.clear();
-				nmbrfldCodigoBloque.clear();
+
 				actualizarLista();
 				if(!result.equals("Error")){
 					close();
@@ -192,7 +179,7 @@ public class VentanaBloque extends Window {
 	
 	private boolean validaCampos() {
 		// TODO Auto-generated method stub
-		if(	txtfldNombreBloque.getValue().toString().trim().equals("") ||nmbrfldCodigoBloque.getValue().toString().trim().equals("")||txtrDescripcionBloque.getValue().toString().trim().equals(""))
+		if(	txtfldNombreBloque.getValue().toString().trim().equals("") ||txtrDescripcionBloque.getValue().toString().trim().equals(""))
 //		programa.setIdPrograma(nmbrfldCodigoPrograma.getValue().intValue()) ||
 //		programa.setDescripcion(txtrDescripcionPrograma.getValue()))
 		{
