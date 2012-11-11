@@ -50,6 +50,11 @@ public class DTEvent
 	
 	public static final EventType SELECCIONAR_COMPETENCIA_TRANSVERSAL= new EventType();
 	
+	public static final EventType REFRESCAR_COMPETENCIA_ESPECIFICA= new EventType();
+	
+	public static final EventType REFRESCAR_FILTRO= new EventType();
+	
+	
 	
 	public static AppEvent getAppEvent(EventType ev)
 	{

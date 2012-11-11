@@ -1,18 +1,45 @@
 package co.edu.unicesi.sama.client.competenciasEspecificas;
 
+import co.edu.unicesi.sama.bo.BloqueBO;
+import co.edu.unicesi.sama.bo.ProgramaBO;
+import co.edu.unicesi.sama.client.busqueda.BusquedaService;
+import co.edu.unicesi.sama.client.busqueda.BusquedaServiceAsync;
+import co.edu.unicesi.sama.client.controller.DTEvent;
+import co.edu.unicesi.sama.client.model.BloqueModel;
+import co.edu.unicesi.sama.client.model.CompetenciaTerminalModel;
+
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.form.HiddenField;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class PanelFiltro extends LayoutContainer {
-
+	
+	private Grid gridBloquesDisponibles;
+	private Grid gridProfesionalesDisponibles;
+	private Grid gridTransversalesDisponibles;
+	private Grid gridBloquesSeleccionados;
+	private Grid gridProfesionalesSeleccionadas;
+	private Grid gridTransversalesSeleccionadas;
+	
+	
+	private final BusquedaServiceAsync busquedaService = GWT.create(BusquedaService.class);
+	private ProgramaBO programa;
 	public PanelFiltro() {
 		setSize("760", "795px");
 		setLayout(new TableLayout(7));
@@ -54,7 +81,7 @@ public class PanelFiltro extends LayoutContainer {
 		add(new Text());
 		add(new Text());
 		
-		Grid gridBloquesDisponibles = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		gridBloquesDisponibles = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		add(gridBloquesDisponibles);
 		gridBloquesDisponibles.setSize("315", "200");
 		gridBloquesDisponibles.setBorders(true);
@@ -128,7 +155,7 @@ public class PanelFiltro extends LayoutContainer {
 		add(layoutContainer);
 		layoutContainer.setSize("87", "164px");
 		
-		Grid gridBloquesSeleccionados = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		 gridBloquesSeleccionados = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		add(gridBloquesSeleccionados);
 		gridBloquesSeleccionados.setSize("315", "200");
 		gridBloquesSeleccionados.setBorders(true);
@@ -166,7 +193,7 @@ public class PanelFiltro extends LayoutContainer {
 		add(new Text());
 		add(new Text());
 		
-		Grid gridProfesionalesDisponibles = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		 gridProfesionalesDisponibles = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		add(gridProfesionalesDisponibles);
 		gridProfesionalesDisponibles.setSize("315", "200");
 		gridProfesionalesDisponibles.setBorders(true);
@@ -240,7 +267,7 @@ public class PanelFiltro extends LayoutContainer {
 		add(layoutContainer_1);
 		layoutContainer_1.setSize("87", "164");
 		
-		Grid gridProfesionalesSeleccionadas = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		 gridProfesionalesSeleccionadas = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		add(gridProfesionalesSeleccionadas);
 		gridProfesionalesSeleccionadas.setSize("315", "200");
 		gridProfesionalesSeleccionadas.setBorders(true);
@@ -278,7 +305,7 @@ public class PanelFiltro extends LayoutContainer {
 		add(new Text());
 		add(new Text());
 		
-		Grid gridTransversalesDisponibles = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		gridTransversalesDisponibles = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		add(gridTransversalesDisponibles);
 		gridTransversalesDisponibles.setSize("315", "200");
 		gridTransversalesDisponibles.setBorders(true);
@@ -352,7 +379,7 @@ public class PanelFiltro extends LayoutContainer {
 		add(layoutContainer_2);
 		layoutContainer_2.setSize("87", "164");
 		
-		Grid gridTransversalesSeleccionadas = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		 gridTransversalesSeleccionadas = new Grid(new ListStore(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
 		add(gridTransversalesSeleccionadas);
 		gridTransversalesSeleccionadas.setSize("315", "200");
 		gridTransversalesSeleccionadas.setBorders(true);
@@ -376,5 +403,68 @@ public class PanelFiltro extends LayoutContainer {
 		btnContinuar.setSize("87", "22");
 		add(new Text());
 	}
+
+	public void recargarPanel() {
+		// TODO Auto-generated method stub
+		
+		
+		
+	}
+	
+	public void actualizarListaBloques(ListStore<BloqueModel> lista){
+
+		if(lista!=null){
+			
+			gridBloquesDisponibles.reconfigure(lista, getColumnModel());			
+		}else{
+			
+			gridBloquesDisponibles.reconfigure(new ListStore<BloqueModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		}
+	}
+	
+	public void actualizarListaTransversales(ListStore<CompetenciaTerminalModel> lista){
+
+		if(lista!=null){
+			
+			gridTransversalesDisponibles.reconfigure(lista, getColumnModel());			
+		}else{
+			
+			gridTransversalesDisponibles.reconfigure(new ListStore<CompetenciaTerminalModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		}
+	}
+	
+	public void actualizarListaProfesionales(ListStore<CompetenciaTerminalModel> lista){
+
+		if(lista!=null){
+			
+			gridProfesionalesDisponibles.reconfigure(lista, getColumnModel());			
+		}else{
+			
+			gridProfesionalesDisponibles.reconfigure(new ListStore<CompetenciaTerminalModel>(), new ColumnModel(Collections.<ColumnConfig>emptyList()));
+		}
+	}
+	
+	private ColumnModel getColumnModel( )
+    {
+        List<ColumnConfig> configs = new ArrayList<ColumnConfig>( );
+
+        ColumnConfig column = new ColumnConfig( "id", 60 );
+        column.setHeader("ID");
+        configs.add( column );
+
+        column = new ColumnConfig( "nombre", 190 );
+        column.setAlignment( HorizontalAlignment.LEFT );
+        column.setHeader("Nombre");
+        configs.add( column );
+        
+
+
+        return new ColumnModel( configs );
+    }
+	
+
+
+
+
 
 }

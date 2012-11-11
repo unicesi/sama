@@ -14,6 +14,7 @@ import co.edu.unicesi.sama.client.bloques.VentanaBloque;
 import co.edu.unicesi.sama.client.busqueda.ListaProgramas;
 import co.edu.unicesi.sama.client.competencias.PanelCompetenciasProfesionales;
 import co.edu.unicesi.sama.client.competencias.PanelCompetenciasTransversales;
+import co.edu.unicesi.sama.client.competenciasEspecificas.PanelFiltro;
 import co.edu.unicesi.sama.client.model.BloqueModel;
 import co.edu.unicesi.sama.client.model.CompetenciaTerminalModel;
 import co.edu.unicesi.sama.client.model.CompetenciaEspecificaModel;
@@ -53,6 +54,9 @@ public class DTSamaController extends Controller{
 		registerEventTypes(DTEvent.REFRESCAR_LINEA_TRANSVERSALNOASOCIADAS);
 		registerEventTypes(DTEvent.REFRESCAR_LINEA_TRANSVERSAL);
 
+		registerEventTypes(DTEvent.REFRESCAR_COMPETENCIA_ESPECIFICA);
+		registerEventTypes(DTEvent.REFRESCAR_FILTRO);
+
 
 	}
 	@Override
@@ -83,7 +87,7 @@ public class DTSamaController extends Controller{
 				PanelCompetenciasProfesionales panelProf = Registry.get("panelProfesionales");
 				panelProf.limpiar();
 				panelProf.asignarPrograma();
-				
+
 				PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
 				panelTrans.limpiar();
 				panelTrans.asignarPrograma();
@@ -93,7 +97,14 @@ public class DTSamaController extends Controller{
 
 				TabPanel tabs = Registry.get( "tabPanel");
 				tabs.enable( );
-
+				
+				Registry.register( "idCompetenciaTransversal", null);
+				Registry.register( "idCompetenciaProfesional",null);
+				
+				PanelFiltro panelFil = Registry.get("panelFiltro");
+				//panelFil.actualizarLista();
+				
+				
 
 
 			}else{
@@ -111,10 +122,14 @@ public class DTSamaController extends Controller{
 						}
 						PanelBloques panelBloques = Registry.get("panelBloques");
 						panelBloques.actualizarListaBloques(lista);
+						PanelFiltro panelFil = Registry.get("panelFiltro");
+						panelFil.actualizarListaBloques(lista);
 					}else{
 
 						PanelBloques panelBloques = Registry.get("panelBloques");
 						panelBloques.actualizarListaBloques(null);
+						PanelFiltro panelFil = Registry.get("panelFiltro");
+						panelFil.actualizarListaBloques(null);
 					}
 
 
@@ -137,15 +152,19 @@ public class DTSamaController extends Controller{
 
 							PanelCompetenciasProfesionales panelprof = Registry.get("panelProfesionales");
 							panelprof.actualizarListaLineas(lista);
+							PanelFiltro panelFil = Registry.get("panelFiltro");
+							panelFil.actualizarListaProfesionales(lista);
 						}else{
 
 							PanelCompetenciasProfesionales panelprof = Registry.get("panelProfesionales");
 							panelprof.actualizarListaLineas(null);
+							PanelFiltro panelFil = Registry.get("panelFiltro");
+							panelFil.actualizarListaProfesionales(null);
 						}
 
 
 					}else{
-						
+
 						if(event.getType().equals(DTEvent.REFRESCAR_COMPETENCIAS_TRANSVERSALES)){
 
 							ArrayList<CompetenciaTerminalBO> competencias = (ArrayList<CompetenciaTerminalBO>)event.getData();
@@ -163,228 +182,272 @@ public class DTSamaController extends Controller{
 
 								PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
 								panelTrans.actualizarListaLineas(lista);
+								PanelFiltro panelFil = Registry.get("panelFiltro");
+								panelFil.actualizarListaTransversales(lista);
 							}else{
 
 								PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
 								panelTrans.actualizarListaLineas(null);
+								PanelFiltro panelFil = Registry.get("panelFiltro");
+								panelFil.actualizarListaTransversales(null);
 							}
 
 
 						}else{
 
-						if(event.getType().equals(DTEvent.SELECCIONAR_BLOQUE)){
+							if(event.getType().equals(DTEvent.SELECCIONAR_BLOQUE)){
 
-							BloqueModel model = (BloqueModel)event.getData();
-							Registry.register( "idBloque", model.getId());
-
-							//TODO Asociar a los paneles
-							PanelBloques panelBloques = Registry.get("panelBloques");
-							panelBloques.cargarMaterias();
-
-
-						}else{
-
-							if(event.getType().equals(DTEvent.SELECCIONAR_COMPETENCIA_PROFESIONAL)){
-								
-								CompetenciaTerminalModel model =(CompetenciaTerminalModel)event.getData();
-								System.out.println("llamando evento selecionar comp profesional" + model.getId());
-								Registry.register( "idCompetenciaProfesional", model.getId());
+								BloqueModel model = (BloqueModel)event.getData();
+								Registry.register( "idBloque", model.getId());
 
 								//TODO Asociar a los paneles
-								PanelCompetenciasProfesionales panelProf  =Registry.get("panelProfesionales");
-								panelProf.cargarLineasProf();
+								PanelBloques panelBloques = Registry.get("panelBloques");
+								panelBloques.cargarMaterias();
+								
+								Registry.register( "idCompetenciaTransversal", null);
+								Registry.register( "idCompetenciaProfesional",null);
+
 
 							}else{
-								
-								if(event.getType().equals(DTEvent.SELECCIONAR_COMPETENCIA_TRANSVERSAL)){
-									
+
+								if(event.getType().equals(DTEvent.SELECCIONAR_COMPETENCIA_PROFESIONAL)){
+
 									CompetenciaTerminalModel model =(CompetenciaTerminalModel)event.getData();
 									System.out.println("llamando evento selecionar comp profesional" + model.getId());
-									Registry.register( "idCompetenciaTransversal", model.getId());
+									Registry.register( "idCompetenciaProfesional", model.getId());
 
 									//TODO Asociar a los paneles
-									PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
-									panelTrans.cargarLineasProf();
-
-								}else{
-								
-								if(event.getType().equals(DTEvent.ASOCIAR_MATERIA)){
-
-									PanelBloques panelBloques = Registry.get("panelBloques");
-									panelBloques.asociarMateria();
-
-
-
-								}else{
-
-									if(event.getType().equals(DTEvent.DESASOCIAR_MATERIA)){
-
-										PanelBloques panelBloques = Registry.get("panelBloques");
-										panelBloques.desasociarMateria();
-
-
-
-									}else{
-
-								if(event.getType().equals(DTEvent.ASOCIAR_LINEA_PROFESIONAL)){
-
 									PanelCompetenciasProfesionales panelProf  =Registry.get("panelProfesionales");
-									panelProf.asociarLinea();
-
-
+									panelProf.cargarLineasProf();
 
 								}else{
 
-									if(event.getType().equals(DTEvent.DESASOCIAR_LINEA_PROFESIONAL)){
+									if(event.getType().equals(DTEvent.SELECCIONAR_COMPETENCIA_TRANSVERSAL)){
 
-										PanelCompetenciasProfesionales panelProf  =Registry.get("panelProfesionales");
-										panelProf.desasociarLinea();
+										CompetenciaTerminalModel model =(CompetenciaTerminalModel)event.getData();
+										System.out.println("llamando evento selecionar comp profesional" + model.getId());
+										Registry.register( "idCompetenciaTransversal", model.getId());
 
-
-
-									}else{
-								
-								if(event.getType().equals(DTEvent.ASOCIAR_LINEA_TRANSVERSAL)){
-
-									PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
-									panelTrans.asociarLinea();
-
-
-
-								}else{
-
-									if(event.getType().equals(DTEvent.DESASOCIAR_LINEA_TRANSVERSAL)){
-
+										//TODO Asociar a los paneles
 										PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
-										panelTrans.desasociarLinea();
-
-
+										panelTrans.cargarLineasProf();
 
 									}else{
-										if(event.getType().equals(DTEvent.REFRESCAR_LINEA_PROFESIONAL)){
-											System.out.println("entrando a refrescar linea profesional");
-											ArrayList<CompetenciaEspecificaBO> lineas = (ArrayList<CompetenciaEspecificaBO>)event.getData();
 
-											ListStore<CompetenciaEspecificaModel> listaAsociados = new ListStore<CompetenciaEspecificaModel>();
-											ListStore<CompetenciaEspecificaModel> listaNoAsociados = new ListStore<CompetenciaEspecificaModel>();
-											
-											for(CompetenciaEspecificaBO b:lineas){
-												System.out.println(b.getIdLineaDeCompetencia()+"-"+String.valueOf(b.isAsociado()));
+										if(event.getType().equals(DTEvent.ASOCIAR_MATERIA)){
+
+											PanelBloques panelBloques = Registry.get("panelBloques");
+											panelBloques.asociarMateria();
+
+
+
+										}else{
+
+											if(event.getType().equals(DTEvent.REFRESCAR_FILTRO)){
+
+												PanelFiltro panelFiltro = Registry.get("panelFiltro");
 												
-											}
-											if(lineas!=null){
-												for(CompetenciaEspecificaBO b:lineas){
-													if(b.isAsociado()){
-														listaAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
-													}else{
-														listaNoAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
-													}
-													
+												
+												ArrayList<BloqueBO> bloques = (ArrayList<BloqueBO>)event.getData();
 
+												ListStore<BloqueModel> lista = new ListStore<BloqueModel>();
+
+												if(bloques!=null){
+
+													for(BloqueBO b:bloques){
+
+
+														lista.add(BloqueModel.toModelFromBO(b));
+
+													}
+
+													
+													panelFiltro.actualizarListaBloques(lista);
+												}else{
+
+													
+													panelFiltro.actualizarListaBloques(null);
 												}
-												PanelCompetenciasProfesionales panelCompetenciasProf = Registry.get("panelProfesionales");
-												panelCompetenciasProf.actualizarListaCompetenciasAsociadas(listaAsociados);
-												panelCompetenciasProf.actualziarListaCompetenciasNoAsociadas(listaNoAsociados);
+
+
+
+										}else{
+
+											if(event.getType().equals(DTEvent.DESASOCIAR_MATERIA)){
+
+												PanelBloques panelBloques = Registry.get("panelBloques");
+												panelBloques.desasociarMateria();
+
+
 
 											}else{
 
-												PanelCompetenciasProfesionales panelCompetenciasProf = Registry.get("panelProfesionales");
-												panelCompetenciasProf.actualizarListaCompetenciasAsociadas(null);
-												panelCompetenciasProf.actualziarListaCompetenciasNoAsociadas(null);
+												if(event.getType().equals(DTEvent.ASOCIAR_LINEA_PROFESIONAL)){
 
-											}
-										}
+													PanelCompetenciasProfesionales panelProf  =Registry.get("panelProfesionales");
+													panelProf.asociarLinea();
 
-										else{
-										
-										if(event.getType().equals(DTEvent.REFRESCAR_LINEA_TRANSVERSAL)){
-											
-											ArrayList<CompetenciaEspecificaBO> lineas = (ArrayList<CompetenciaEspecificaBO>)event.getData();
 
-											ListStore<CompetenciaEspecificaModel> listaAsociados = new ListStore<CompetenciaEspecificaModel>();
-											ListStore<CompetenciaEspecificaModel> listaNoAsociados = new ListStore<CompetenciaEspecificaModel>();
-											
-										
-											if(lineas!=null){
-												for(CompetenciaEspecificaBO b:lineas){
-													if(b.isAsociado()){
-														listaAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
+
+												}else{
+
+													if(event.getType().equals(DTEvent.DESASOCIAR_LINEA_PROFESIONAL)){
+
+														PanelCompetenciasProfesionales panelProf  =Registry.get("panelProfesionales");
+														panelProf.desasociarLinea();
+
+
+
 													}else{
-														listaNoAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
+
+														if(event.getType().equals(DTEvent.ASOCIAR_LINEA_TRANSVERSAL)){
+
+															PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
+															panelTrans.asociarLinea();
+
+
+
+											
+
+															}else{
+
+																if(event.getType().equals(DTEvent.DESASOCIAR_LINEA_TRANSVERSAL)){
+
+																	PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
+																	panelTrans.desasociarLinea();
+
+
+
+																}else{
+																	if(event.getType().equals(DTEvent.REFRESCAR_LINEA_PROFESIONAL)){
+																		System.out.println("entrando a refrescar linea profesional");
+																		ArrayList<CompetenciaEspecificaBO> lineas = (ArrayList<CompetenciaEspecificaBO>)event.getData();
+
+																		ListStore<CompetenciaEspecificaModel> listaAsociados = new ListStore<CompetenciaEspecificaModel>();
+																		ListStore<CompetenciaEspecificaModel> listaNoAsociados = new ListStore<CompetenciaEspecificaModel>();
+
+																		for(CompetenciaEspecificaBO b:lineas){
+																			System.out.println(b.getIdLineaDeCompetencia()+"-"+String.valueOf(b.isAsociado()));
+
+																		}
+																		if(lineas!=null){
+																			for(CompetenciaEspecificaBO b:lineas){
+																				if(b.isAsociado()){
+																					listaAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
+																				}else{
+																					listaNoAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
+																				}
+
+
+																			}
+																			PanelCompetenciasProfesionales panelCompetenciasProf = Registry.get("panelProfesionales");
+																			panelCompetenciasProf.actualizarListaCompetenciasAsociadas(listaAsociados);
+																			panelCompetenciasProf.actualziarListaCompetenciasNoAsociadas(listaNoAsociados);
+
+																		}else{
+
+																			PanelCompetenciasProfesionales panelCompetenciasProf = Registry.get("panelProfesionales");
+																			panelCompetenciasProf.actualizarListaCompetenciasAsociadas(null);
+																			panelCompetenciasProf.actualziarListaCompetenciasNoAsociadas(null);
+
+																		}
+																	}
+
+																	else{
+
+																		if(event.getType().equals(DTEvent.REFRESCAR_LINEA_TRANSVERSAL)){
+
+																			ArrayList<CompetenciaEspecificaBO> lineas = (ArrayList<CompetenciaEspecificaBO>)event.getData();
+
+																			ListStore<CompetenciaEspecificaModel> listaAsociados = new ListStore<CompetenciaEspecificaModel>();
+																			ListStore<CompetenciaEspecificaModel> listaNoAsociados = new ListStore<CompetenciaEspecificaModel>();
+
+
+																			if(lineas!=null){
+																				for(CompetenciaEspecificaBO b:lineas){
+																					if(b.isAsociado()){
+																						listaAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
+																					}else{
+																						listaNoAsociados.add(CompetenciaEspecificaModel.toModelFromBO(b));
+																					}
+
+
+																				}
+																				PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
+																				panelTrans.actualizarListaCompetenciasAsociadas(listaAsociados);
+																				panelTrans.actualziarListaCompetenciasNoAsociadas(listaNoAsociados);
+
+																			}else{
+
+																				PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
+																				panelTrans.actualizarListaCompetenciasAsociadas(null);
+																				panelTrans.actualziarListaCompetenciasNoAsociadas(null);
+
+																			}
+																		}
+
+																		else{
+																			if(event.getType().equals(DTEvent.REFRESCAR_MATERIAS_BLOQUES)){
+
+																				ArrayList<MateriaBO> materias = (ArrayList<MateriaBO>)event.getData();
+
+																				ListStore<MateriaModel> lista = new ListStore<MateriaModel>();
+																				if(materias!=null){
+																					for(MateriaBO b:materias){
+																						System.out.println(b.getIdMateria() + " " + b.getNombre());
+																						lista.add(MateriaModel.toModelFromBO(b));
+
+																					}
+																					PanelBloques panelBloques = Registry.get("panelBloques");
+																					panelBloques.actualizarListaMateriasAsociadas(lista);
+
+																				}else{
+
+																					PanelBloques panelBloques = Registry.get("panelBloques");
+																					panelBloques.actualizarListaMateriasAsociadas(null);
+
+																				}
+																			}if(event.getType().equals(DTEvent.REFRESCAR_MATERIAS_BLOQUESNOASOCIADAS)){
+																				System.out.println("entrando a refrescar materia bloques no asociadas");
+																				ArrayList<MateriaBO> materias = (ArrayList<MateriaBO>)event.getData();
+
+
+
+																				ListStore<MateriaModel> lista = new ListStore<MateriaModel>();
+																				if(materias!=null){
+																					for(MateriaBO b:materias){
+																						System.out.println(b.getIdMateria() + " " + b.getNombre());
+																						lista.add(MateriaModel.toModelFromBO(b));
+
+																					}
+																					PanelBloques panelBloques = Registry.get("panelBloques");
+																					panelBloques.actualziarListaMateriasNoAsociadas(lista);
+
+																				}else{
+
+																					PanelBloques panelBloques = Registry.get("panelBloques");
+																					panelBloques.actualziarListaMateriasNoAsociadas(null);
+
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
 													}
-													
 
 												}
-												PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
-												panelTrans.actualizarListaCompetenciasAsociadas(listaAsociados);
-												panelTrans.actualziarListaCompetenciasNoAsociadas(listaNoAsociados);
-
-											}else{
-
-												PanelCompetenciasTransversales panelTrans = Registry.get("panelTransversales");
-												panelTrans.actualizarListaCompetenciasAsociadas(null);
-												panelTrans.actualziarListaCompetenciasNoAsociadas(null);
-
 											}
 										}
 
-										else{
-											if(event.getType().equals(DTEvent.REFRESCAR_MATERIAS_BLOQUES)){
-												
-												ArrayList<MateriaBO> materias = (ArrayList<MateriaBO>)event.getData();
-
-												ListStore<MateriaModel> lista = new ListStore<MateriaModel>();
-												if(materias!=null){
-													for(MateriaBO b:materias){
-														System.out.println(b.getIdMateria() + " " + b.getNombre());
-														lista.add(MateriaModel.toModelFromBO(b));
-
-													}
-													PanelBloques panelBloques = Registry.get("panelBloques");
-													panelBloques.actualizarListaMateriasAsociadas(lista);
-
-												}else{
-
-													PanelBloques panelBloques = Registry.get("panelBloques");
-													panelBloques.actualizarListaMateriasAsociadas(null);
-
-												}
-											}if(event.getType().equals(DTEvent.REFRESCAR_MATERIAS_BLOQUESNOASOCIADAS)){
-												System.out.println("entrando a refrescar materia bloques no asociadas");
-												ArrayList<MateriaBO> materias = (ArrayList<MateriaBO>)event.getData();
-
-
-
-												ListStore<MateriaModel> lista = new ListStore<MateriaModel>();
-												if(materias!=null){
-													for(MateriaBO b:materias){
-														System.out.println(b.getIdMateria() + " " + b.getNombre());
-														lista.add(MateriaModel.toModelFromBO(b));
-
-													}
-													PanelBloques panelBloques = Registry.get("panelBloques");
-													panelBloques.actualziarListaMateriasNoAsociadas(lista);
-
-												}else{
-
-													PanelBloques panelBloques = Registry.get("panelBloques");
-													panelBloques.actualziarListaMateriasNoAsociadas(null);
-
-												}
-											}
-										}
 									}
 								}
 							}
 						}
 					}
-
-				}}}
-					
-						}
-						}
-					}}
-				}}
+				}
+			}
 		}
 	}
 }
