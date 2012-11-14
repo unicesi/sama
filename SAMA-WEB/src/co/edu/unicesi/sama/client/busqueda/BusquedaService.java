@@ -27,4 +27,10 @@ public interface BusquedaService extends RemoteService {
 	public ArrayList<CompetenciaTerminalBO> buscarCompetenciaPorPrograma(String busqueda,String programa);
 	
 	public ArrayList<CompetenciaEspecificaBO> buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias);
+	
+	public AsociacionEspecificaBO buscarAsociacionCompetenciaEspecificaMateria (String programa, String bloque, String CompetenciaEspecifica);
+	
+	public AsociacionEspecificaBO buscarAsociacionCompetenciaEspecificaBloque (String programa, String bloque, String CompetenciaEspecifica);
+	
+	
 }

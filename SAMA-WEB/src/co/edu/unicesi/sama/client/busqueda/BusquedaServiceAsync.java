@@ -24,4 +24,10 @@ public interface BusquedaServiceAsync {
 	public void buscarCompetenciaPorPrograma(String busqueda,String programa, AsyncCallback<ArrayList<CompetenciaTerminalBO>> callback);
 	
 	public void buscarLineaDeCompetenciaPorCompetencia(String programa, String competencias, AsyncCallback<ArrayList<CompetenciaEspecificaBO>> callback);
+	
+	public void buscarAsociacionCompetenciaEspecificaMateria (String programa, String bloque, String CompetenciaEspecifica, AsyncCallback<AsociacionEspecificaBO> callback);
+	
+	public void buscarAsociacionCompetenciaEspecificaBloque (String programa, String bloque, String CompetenciaEspecifica, AsyncCallback<AsociacionEspecificaBO> callback);
+	
+	
 }

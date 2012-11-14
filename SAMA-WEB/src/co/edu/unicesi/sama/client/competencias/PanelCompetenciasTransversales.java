@@ -10,8 +10,9 @@ import co.edu.unicesi.sama.client.busqueda.ListaProgramas;
 import co.edu.unicesi.sama.client.controller.DTEvent;
 import co.edu.unicesi.sama.client.model.BloqueModel;
 
-import co.edu.unicesi.sama.client.model.CompetenciaTerminalModel;
 import co.edu.unicesi.sama.client.model.CompetenciaEspecificaModel;
+import co.edu.unicesi.sama.client.model.CompetenciaTerminalModel;
+import co.edu.unicesi.sama.client.model.CompetenciaTerminalModel;
 import co.edu.unicesi.sama.client.model.MateriaModel;
 import co.edu.unicesi.sama.client.model.ProgramaModel;
 
@@ -415,7 +416,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 
 			@Override
 			public void handleEvent(GridEvent<CompetenciaEspecificaModel> be) {
-				System.out.println("eventoNoasociadaLinea");
+				
 				CompetenciaEspecificaModel pM = be.getGrid().getSelectionModel().getSelectedItem();
 				Registry.register("lineaNoAsociada",pM);
 				Registry.register("idLineaNoAsociada", pM.getId());
@@ -432,7 +433,7 @@ public class PanelCompetenciasTransversales extends LayoutContainer {
 
 			@Override
 			public void handleEvent(GridEvent<CompetenciaEspecificaModel> be) {
-				System.out.println("eventoasociadaLinea");
+				
 				CompetenciaEspecificaModel pM = be.getGrid().getSelectionModel().getSelectedItem();
 				Registry.register("lineaAsociada",pM);
 				Registry.register("idLineaAsociada",pM.getId());

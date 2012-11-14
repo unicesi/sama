@@ -14,6 +14,8 @@ import javax.persistence.TypedQuery;
 import co.edu.unicesi.sama.bo.*;
 import co.edu.unicesi.sama.dbutil.DBUtil;
 import co.edu.unicesi.sama.entidades.Bloque;
+import co.edu.unicesi.sama.entidades.BloquesCompetenciasespecifica;
+import co.edu.unicesi.sama.entidades.CompetenciasespecificasProgramaPK;
 
 
 
@@ -193,7 +195,7 @@ public class BusquedaSession implements BusquedaServiceRemote, BusquedaServiceLo
 	public ArrayList<CompetenciaEspecificaBO> buscarLineaDeCompetenciaPorCompetencia(
 			String programa, String competencias) {
 try {
-	System.out.println("entrando a buscar Linea de competencia");
+	
 			TypedQuery<Competenciasespecifica> query = entityManager
 					.createNamedQuery("buscarLineaDeCompetenciaPorCompetencia",
 							Competenciasespecifica.class);
@@ -244,6 +246,106 @@ try {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	
+public AsociacionEspecificaBO buscarAsociacionCompetenciaEspecificaMateria (String programa,String bloque, String CompetenciaEspecifica){
+
+
+	TypedQuery<MateriasCompetenciasespecifica> query = entityManager
+			.createNamedQuery("consultaMateriaCompetenciaEspecifica",
+					MateriasCompetenciasespecifica.class);
+	
+	query.setMaxResults(30);
+	
+	
+	query.setParameter("materia", "%" + bloque + "%");
+	
+	List<MateriasCompetenciasespecifica> list = query.getResultList();
+	
+	boolean encontrado=false;
+
+	AsociacionEspecificaBO bo=null;
+	for(int i=0; i<list.size()&&!encontrado;i++){
+		MateriasCompetenciasespecifica temporal= list.get(i);
+		CompetenciasespecificasPrograma temporal2=temporal.getCompetenciasespecificasPrograma();
+		if(temporal2!=null){
+		CompetenciasespecificasProgramaPK  temporal3=temporal2.getId();
+		
+		
+				
+	if (temporal3!=null){
+		if (temporal3.getFK_CodigoPrograma().equals(programa)&&temporal3.getFK_IdCompetenciaEspecifica()==Integer.valueOf(CompetenciaEspecifica)){
+			
+			encontrado=true;
+			
+			bo=list.get(i).toBo();
+		}
+		}
+		}
+			
+		
+		
+		
+		
+		
+	}
+	
+	return bo;
+	
+	
+	
+	
+}
+
+	
+	public AsociacionEspecificaBO buscarAsociacionCompetenciaEspecificaBloque (String programa, String bloque, String CompetenciaEspecifica){
+		
+		
+
+		TypedQuery<BloquesCompetenciasespecifica> query = entityManager
+				.createNamedQuery("consultaBloqueCompetenciaEspecifica",
+						BloquesCompetenciasespecifica.class);
+		
+		query.setMaxResults(30);
+		
+		
+		query.setParameter("bloque", "%" + bloque + "%");
+		
+		List<BloquesCompetenciasespecifica> list = query.getResultList();
+		
+		boolean encontrado=false;
+
+		AsociacionEspecificaBO bo=null;
+		for(int i=0; i<list.size()&&!encontrado;i++){
+			BloquesCompetenciasespecifica temporal= list.get(i);
+			CompetenciasespecificasPrograma temporal2=temporal.getCompetenciasespecificasPrograma();
+			if(temporal2!=null){
+			CompetenciasespecificasProgramaPK  temporal3=temporal2.getId();
+			
+			
+					
+		if (temporal3!=null){
+			if (temporal3.getFK_CodigoPrograma().equals(programa)&&temporal3.getFK_IdCompetenciaEspecifica()==Integer.valueOf(CompetenciaEspecifica)){
+				
+				encontrado=true;
+				
+				bo=list.get(i).toBo();
+			}
+			}
+			}
+				
+			
+			
+			
+			
+			
+		}
+		
+		return bo;
+		
+		
+		
+		
 	}
 
 }

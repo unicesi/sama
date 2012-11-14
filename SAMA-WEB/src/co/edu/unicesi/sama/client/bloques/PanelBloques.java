@@ -419,7 +419,7 @@ public class PanelBloques extends LayoutContainer {
 			@Override
 			public void onFailure(Throwable arg0) {
 				
-				System.out.println("No se pudieron cargar las materias");
+				
 				
 			}
 
@@ -452,7 +452,7 @@ public class PanelBloques extends LayoutContainer {
 				
 				if(result != null){
 //					materiasAsociadas = new ArrayList<MateriaBO>();
-					materiasAsociadas = result;
+					
 //					llenarListas();
 					Dispatcher.forwardEvent(DTEvent.REFRESCAR_MATERIAS_BLOQUES, result);
 					

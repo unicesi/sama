@@ -6,6 +6,7 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import co.edu.unicesi.sama.bo.AsociacionEspecificaBO;
 import co.edu.unicesi.sama.bo.BloqueBO;
 import co.edu.unicesi.sama.bo.BloquesMateriaPKBO;
 
@@ -118,6 +119,36 @@ try{
 			return null;
 		}
 	}
+
+
+	@Override
+	public AsociacionEspecificaBO buscarAsociacionCompetenciaEspecificaMateria(
+			String programa, String bloque, String CompetenciaEspecifica) {
+		
+		// TODO Auto-generated method stub
+				try{
+					
+					return  busquedaRemote.buscarAsociacionCompetenciaEspecificaMateria(programa,bloque, CompetenciaEspecifica);
+				}catch(Exception e){
+					
+					return null;
+				}
+	}
+
+	@Override
+	public AsociacionEspecificaBO buscarAsociacionCompetenciaEspecificaBloque(
+			String programa, String bloque, String CompetenciaEspecifica) {
+		// TODO Auto-generated method stub
+		try{
+			
+			return  busquedaRemote.buscarAsociacionCompetenciaEspecificaBloque(programa,bloque, CompetenciaEspecifica);
+		}catch(Exception e){
+			
+			return null;
+		}
+	}
+
+	
 
 
 

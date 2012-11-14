@@ -28,6 +28,16 @@
     <url-pattern>/sama_web/competenciasService</url-pattern>
   </servlet-mapping>
   
+  
+   <servlet>
+    <servlet-name>asociacionEspecificaServlet</servlet-name>
+    <servlet-class>co.edu.unicesi.sama.server.AsociacionEspecificaImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>asociacionEspecificaServlet</servlet-name>
+    <url-pattern>/sama_web/asociacionEspecificaService</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>competenciaProfesionalServlet</servlet-name>
     <servlet-class>co.edu.unicesi.sama.server.CompetenciaProfesionalProgramaServiceImpl</servlet-class>

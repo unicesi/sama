@@ -25,6 +25,8 @@ import co.edu.unicesi.sama.client.competencias.PanelCompetenciasTransversales;
 import co.edu.unicesi.sama.client.competenciasEspecificas.PanelAsociarCompetenciasEspecificas;
 import co.edu.unicesi.sama.client.competenciasEspecificas.PanelAsociarCompetenciasEspecificasBloque;
 import co.edu.unicesi.sama.client.competenciasEspecificas.PanelFiltro;
+import co.edu.unicesi.sama.client.competenciasEspecificas.VentanaBloqueFiltro;
+import co.edu.unicesi.sama.client.competenciasEspecificas.VentanaMateriaFiltro;
 import co.edu.unicesi.sama.client.controller.DTEvent;
 import co.edu.unicesi.sama.client.controller.DTSamaController;
 import co.edu.unicesi.sama.client.materias.VentanaMateria;
@@ -73,6 +75,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
  */
 public class SAMA_WEB implements EntryPoint {
 	
+	
 	private VentanaPrograma programa;
 	private VentanaMateria materia;
 	private ListaProgramas listaProgramas;
@@ -83,6 +86,9 @@ public class SAMA_WEB implements EntryPoint {
 	private PanelAsociarCompetenciasEspecificasBloque panelAsociarBloque;
 	private PanelAsociarCompetenciasEspecificas panelAsociar;
 	private final BusquedaServiceAsync busquedaService = GWT.create(BusquedaService.class);
+	private VentanaBloqueFiltro bloqueFiltro;
+	private VentanaMateriaFiltro materiaFiltro;
+	
 	
 	public void onModuleLoad() {
 
@@ -164,6 +170,20 @@ public class SAMA_WEB implements EntryPoint {
 		tbtmCompetenciasProfesionales.add(panelProfesionales);
 		tabPanel.add(tbtmCompetenciasProfesionales);
 
+		bloqueFiltro = new VentanaBloqueFiltro();
+		bloqueFiltro.setSize(430, 340);
+		
+		
+		
+		Registry.register("bloquesFiltro", bloqueFiltro);
+		
+		materiaFiltro = new VentanaMateriaFiltro();
+		materiaFiltro.setSize(430, 340);
+		
+		
+		
+		Registry.register("materiaFiltro", materiaFiltro);
+		
 		
 
 		
@@ -179,12 +199,19 @@ public class SAMA_WEB implements EntryPoint {
 		Registry.register("panelFiltro", panelFiltro);
 		
 		panelAsociar = new PanelAsociarCompetenciasEspecificas();
+		panelAsociar.setVisible(false);
 		Registry.register("panelAsociar", panelAsociar);
 		
 		panelAsociarBloque = new PanelAsociarCompetenciasEspecificasBloque();
+		panelAsociarBloque.setVisible(false);
 		Registry.register("panelAsociarBloque", panelAsociarBloque);
 		
 		tbtmAsociarCompetenciasEspecificas.add(panelFiltro);
+		tbtmAsociarCompetenciasEspecificas.add(panelAsociar);
+		tbtmAsociarCompetenciasEspecificas.add(panelAsociarBloque);
+		
+		
+		
 		tabPanel.add(tbtmAsociarCompetenciasEspecificas);
 		layoutContainer.add(tabPanel, new BorderLayoutData(LayoutRegion.CENTER));
 		rootPanel.add(layoutContainer);

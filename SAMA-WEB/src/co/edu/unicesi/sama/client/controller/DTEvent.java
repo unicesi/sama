@@ -53,8 +53,41 @@ public class DTEvent
 	public static final EventType REFRESCAR_COMPETENCIA_ESPECIFICA= new EventType();
 	
 	public static final EventType REFRESCAR_FILTRO= new EventType();
+
+	public static final EventType FILTRAR_BLOQUE= new EventType();
+	
+	public static final EventType DESFILTRAR_BLOQUE= new EventType();
+	
+	public static final EventType FILTRAR_TRANSVERSAL= new EventType();
+	
+	public static final EventType DESFILTRAR_TRANSVERSAL= new EventType();
+	
+	public static final EventType FILTRAR_PROFESIONAL= new EventType();
+	
+	public static final EventType DESFILTRAR_PROFESIONAL= new EventType();
+	
+	public static final EventType CAMBIAR_PANELES = new EventType();
+	
+	public static final EventType ACTUALIZAR_BLOQUES_FILTRO = new EventType();
+	
+	public static final EventType CERRAR_VENTANA_BLOQUEFILTRO = new EventType();
+	
+	public static final EventType ABRIR_BLOQUE_FILTRO = new EventType();
+	
+	public static final EventType REFRESCAR_MATERIAS_FILTRO = new EventType();
+	
+	public static final EventType CERRAR_VENTANA_MATERIAFILTRO = new EventType();
+	
+	public static final EventType ABRIR_MATERIA_FILTRO = new EventType();
+	
+	public static final EventType ACTUALIZARCHK_BLOQUE = new EventType();
+	
+	public static final EventType ACTUALIZARCHK_MATERIA = new EventType();
 	
 	
+	
+
+		
 	
 	public static AppEvent getAppEvent(EventType ev)
 	{
