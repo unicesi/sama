@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RwporteBloquesCompetencias" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dd9e87c-7f90-4cd3-a549-6053d4764cfc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset" uuid="6c759d0c-3f8a-43ef-a72d-9d5c2ce2c359">
+		<parameter name="CodigoBloque" class="java.lang.Integer" isForPrompting="false">
+			<defaultValueExpression><![CDATA[$F{bloques_id}]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     programas.`codigo` AS programas_codigo,
+     programas.`nombre` AS programas_nombre,
+     programas.`descripcion` AS programas_descripcion,
+     bloques.`id` AS bloques_id,
+     bloques.`nombre` AS bloques_nombre,
+     bloques.`FK_idPrograma` AS bloques_FK_idPrograma,
+     bloques_competenciasespecificas.`FK_CodigoPrograma` AS bloques_competenciasespecificas_FK_CodigoPrograma,
+     bloques_competenciasespecificas.`FK_idCompetenciaEspecifica` AS bloques_competenciasespecificas_FK_idCompetenciaEspecifica,
+     bloques_competenciasespecificas.`FK_IdBloque` AS bloques_competenciasespecificas_FK_IdBloque,
+     bloques_competenciasespecificas.`introduce` AS bloques_competenciasespecificas_introduce,
+     bloques_competenciasespecificas.`enseña` AS bloques_competenciasespecificas_enseña,
+     bloques_competenciasespecificas.`aplica` AS bloques_competenciasespecificas_aplica,
+     bloques_competenciasespecificas.`puntaje` AS bloques_competenciasespecificas_puntaje,
+     competenciasespecificas_programas.`FK_CodigoPrograma` AS competenciasespecificas_programas_FK_CodigoPrograma,
+     competenciasespecificas_programas.`FK_IdCompetenciaEspecifica` AS competenciasespecificas_programas_FK_IdCompetenciaEspecifica,
+     competenciasespecificas_programas.`puntaje` AS competenciasespecificas_programas_puntaje,
+     competenciasespecificas.`id` AS competenciasespecificas_id,
+     competenciasespecificas.`nombre` AS competenciasespecificas_nombre
+FROM
+     `programas` programas INNER JOIN `bloques` bloques ON programas.`codigo` = bloques.`FK_idPrograma`
+     INNER JOIN `bloques_competenciasespecificas` bloques_competenciasespecificas ON bloques.`id` = bloques_competenciasespecificas.`FK_IdBloque`
+     INNER JOIN `competenciasespecificas_programas` competenciasespecificas_programas ON bloques_competenciasespecificas.`FK_CodigoPrograma` = competenciasespecificas_programas.`FK_CodigoPrograma`
+     AND competenciasespecificas_programas.`FK_IdCompetenciaEspecifica` = bloques_competenciasespecificas.`FK_idCompetenciaEspecifica`
+     AND programas.`codigo` = competenciasespecificas_programas.`FK_CodigoPrograma`
+     INNER JOIN `competenciasespecificas` competenciasespecificas ON competenciasespecificas_programas.`FK_IdCompetenciaEspecifica` = competenciasespecificas.`id`
+WHERE
+     bloques.`id`=$P{CodigoBloque}]]>
+		</queryString>
+		<field name="bloques_id" class="java.lang.Integer"/>
+		<field name="bloques_nombre" class="java.lang.String"/>
+		<field name="bloques_competenciasespecificas_introduce" class="java.lang.Boolean"/>
+		<field name="bloques_competenciasespecificas_enseña" class="java.lang.Boolean"/>
+		<field name="bloques_competenciasespecificas_aplica" class="java.lang.Boolean"/>
+		<field name="bloques_competenciasespecificas_puntaje" class="java.lang.Integer"/>
+		<field name="competenciasespecificas_nombre" class="java.lang.String"/>
+		<field name="competenciasespecificas_id" class="java.lang.Integer"/>
+		<field name="programas_codigo" class="java.lang.String"/>
+		<field name="competenciasespecificas_programas_puntaje" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="CodigoPrograma" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+    programas.`codigo` AS programas_codigo,
+    programas.`nombre` AS programas_nombre,
+
+    bloques.`nombre` AS bloques_nombre,
+    bloques.`id` AS bloques_id,
+
+
+    bloques_competenciasespecificas.`FK_idCompetenciaEspecifica` AS competenciaEspecifica,
+    bloques_competenciasespecificas.`introduce` AS introduce,
+    bloques_competenciasespecificas.`enseña` AS enseña,
+    bloques_competenciasespecificas.`aplica` AS aplica,
+    bloques_competenciasespecificas.`puntaje` AS puntaje,
+	 (select c.nombre from competenciasespecificas c where c.id= bloques_competenciasespecificas.`FK_idCompetenciaEspecifica`) as Nombre,
+	  (select c.idCompetenciaTerminal from competenciasespecificas c where c.id= bloques_competenciasespecificas.`FK_idCompetenciaEspecifica`) AS CompetenciaTerminal,
+(select c.idCompetenciaGeneral from competenciasterminales c where c.id= CompetenciaTerminal) AS CompetenciaGeneral
+
+FROM
+    `programas` programas INNER JOIN `bloques` bloques ON programas.`codigo` = bloques.`FK_idPrograma`
+    INNER JOIN `bloques_competenciasespecificas` bloques_competenciasespecificas ON bloques.`id` = bloques_competenciasespecificas.`FK_IdBloque`
+WHERE
+programas.`codigo`=$P{CodigoPrograma}
+
+
+
+order by nombre]]>
+	</queryString>
+	<field name="programas_codigo" class="java.lang.String"/>
+	<field name="programas_nombre" class="java.lang.String"/>
+	<field name="bloques_nombre" class="java.lang.String"/>
+	<field name="bloques_id" class="java.lang.Integer"/>
+	<field name="competenciaEspecifica" class="java.lang.Integer"/>
+	<field name="introduce" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="enseña" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplica" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="puntaje" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompetenciaTerminal" class="java.lang.Integer"/>
+	<field name="CompetenciaGeneral" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<image>
+				<reportElement uuid="0373a843-16b6-4a52-b503-ade5e22649e0" x="0" y="0" width="248" height="79"/>
+				<imageExpression><![CDATA["/Users/jdominguez92/Pictures/LogoIcesi1.gif"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement uuid="1a23bb4d-4dca-4528-b88a-31add144854b" x="0" y="92" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="2c231ccc-e7c7-4c0a-9478-6220971c949a" x="205" y="22" width="367" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA DE DISEÑO Y ADMINISTRACIÓN CURRICULAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="39c66a94-e013-48d4-85c1-34bb08f0b69d" x="234" y="42" width="324" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Balance de Competencias Específicas por Programa]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0bfc397f-f5f7-4640-b03d-ba712b2c93d0" x="0" y="0" width="118" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código del Programa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f890f317-20c8-4a09-9e55-320c8c91bf44" x="118" y="0" width="42" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{programas_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e6a13b5-0e4f-4ab9-8369-10fdf6026be7" x="292" y="0" width="280" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{programas_nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="95ce6437-c122-4338-a784-22e7358bebb1" x="173" y="0" width="119" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del Programa:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0ac57aa9-a389-4c7f-9790-46a8e3e90bc5" x="0" y="0" width="133" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del Bloque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e892b46e-9818-44c6-be53-4a3097f0646d" x="133" y="0" width="159" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Competencia Específica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="39b6d87b-445a-4cf0-907a-40237923c1ed" x="502" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Puntaje]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d441a350-b96a-428b-8a32-88dc17987ea8" x="432" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aplica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ddb67314-e357-4bbb-a3d4-03a7d888336a" x="362" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enseña]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="152acc20-c41d-474f-ab78-9ea1bffa051d" x="292" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Introduce]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1a23bb4d-4dca-4528-b88a-31add144854b" x="0" y="0" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="6d24aa77-a625-42a2-be2d-fad5bd5f4cd8" x="0" y="20" width="572" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement uuid="39fbc28c-4ddc-4d59-bcb9-abd50bb7137a" x="0" y="0" width="133" height="25"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{bloques_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d5ad87d3-f57b-4a06-a01a-fa41b00f9a3a" x="133" y="0" width="159" height="25"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d3c081f6-8fc8-40f7-bd44-f4c00cab68b6" x="292" y="0" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{introduce}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d9be05b7-2162-499b-9428-2b65b813dae3" x="362" y="0" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{enseña}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="28deb4a0-7113-4681-a9fe-87bf8a247b58" x="432" y="0" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{aplica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="96a4f9bc-9320-43d7-b5e8-baac9145a3b1" x="502" y="0" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{puntaje}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="42" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="47" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

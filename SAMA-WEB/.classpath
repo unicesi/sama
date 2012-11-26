@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="gxt-2.2.5-gwt22.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SAMA-EJB"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/commons-beanutils-1.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/commons-collections-2.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/commons-digester-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/commons-javaflow-20060411.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/iText-2.1.7.js1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jasperreports-4.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jasperreports-applet-4.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jasperreports-fonts-4.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jasperreports-javaflow-4.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jcommon-1.0.15.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jfreechart-1.0.12.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jpa.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jxl-2.6.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/servlet-api-2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jdominguez92/Downloads/jasperreports-4.8.0/Librerias/jdt-compiler-3.1.1.jar"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+</classpath>

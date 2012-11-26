@@ -1,0 +1,2 @@
+serviceClass: co.edu.unicesi.sama.client.programas.ProgramaService
+path: 798EA68A8852753EB2E1A73BCBA0E1D2.gwt.rpc
