@@ -5,9 +5,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 
-/**
- * The persistent class for the competenciasgenerales database table.
- * 
+/** 
+ * Clase encargada de la persistencia de la tabla competenciasgenerales en la base de datos.
  */
 @Entity
 @Table(name="competenciasgenerales")
@@ -17,7 +16,7 @@ public class Competenciasgenerale implements Serializable {
 	@Id
 	private int id;
 
-	private String descripción;
+	private String descripci—n;
 
 	private String nombre;
 
@@ -50,11 +49,11 @@ public class Competenciasgenerale implements Serializable {
 	}
 
 	public String getDescripción() {
-		return this.descripción;
+		return this.descripci—n;
 	}
 
 	public void setDescripción(String descripción) {
-		this.descripción = descripción;
+		this.descripci—n = descripción;
 	}
 
 	public String getNombre() {

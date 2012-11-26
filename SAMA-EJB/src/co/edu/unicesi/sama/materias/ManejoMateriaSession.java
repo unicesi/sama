@@ -12,7 +12,7 @@ import co.edu.unicesi.sama.entidades.Programa;
 import co.edu.unicesi.sama.exception.SamaException;
 
 /**
- * Session Bean implementation class ManejoProgramaSession
+ * Esta clase es la encargada de crear materias.
  */
 @Stateless
 public class ManejoMateriaSession implements ManejoMateriaRemote,
@@ -22,12 +22,15 @@ public class ManejoMateriaSession implements ManejoMateriaRemote,
 	protected EntityManager entityManager;
 
 	/**
-	 * Default constructor.
+	 * Constructor.
 	 */
 	public ManejoMateriaSession() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String crearMateria(MateriaBO materia) throws SamaException {
 		try {

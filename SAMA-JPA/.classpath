@@ -6,13 +6,13 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SAMA-EJBClient"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.3.3 - Indigo">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="../"/>
 			<attribute name="owner.project.facets" value="jpt.jpa"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SAMA-EJBClient"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

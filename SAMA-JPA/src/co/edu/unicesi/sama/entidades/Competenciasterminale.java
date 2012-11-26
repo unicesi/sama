@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 
-/**
- * The persistent class for the competenciasterminales database table.
- * 
+/** 
+ * Clase encargada de la persistencia de la tabla competenciasgenerales en la base de datos.
  */
 @Entity
 @Table(name="competenciasterminales")

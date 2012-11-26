@@ -20,11 +20,17 @@ import co.edu.unicesi.sama.entidades.Bloque;
 import co.edu.unicesi.sama.entidades.Programa;
 import co.edu.unicesi.sama.exception.SamaException;
 
+/**
+ * Bean de sesion encargado del manejo de los bloques.
+*/
 @Stateless
 public class ManejoBloqueSession  implements ManejoBloqueRemote, ManejoBloqueLocal {
 	@PersistenceContext(unitName = DBUtil.PU_DT)
 	protected EntityManager entityManager;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String crearBloque(String programa, BloqueBO bloque)
 			throws SamaException {
@@ -48,6 +54,11 @@ public class ManejoBloqueSession  implements ManejoBloqueRemote, ManejoBloqueLoc
 		
 	}
 	
+	/**
+	 * Este metodo se encarga de buscar un Programa a partir de su id.
+	 * @param busqueda - int - id del Programa que se desea buscar.
+	 * @return List<Programa> - lista con los programas encontrados. 
+	 */
 	private List<Programa> buscarProgramaporID(String busqueda)
 	{
 		try

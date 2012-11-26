@@ -8,21 +8,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
-
-
+/**
+ * 
+ * Esta clase se encarga de crear el Business Object de un bloque.
+ *
+ */
 public class BloqueBO implements Serializable {
 	
-	
+	/**
+	 * idBloque - int - id del bloque.
+	 */
 	private int idBloque;
 
+	/**
+	 * descripcion - String - descripcion del bloque.
+	 */
 	private String descripcion;
 
+	/**
+	 * nombre - String - nombre del bloque.
+	 */
 	private String nombre;
 	
+	/**
+	 * materias - ArrayList<MateriaBO> es el conjunto de Business Object de materias del bloque.
+	 */
 	private ArrayList<MateriaBO> materias;
 
 	//bi-directional many-to-one association to Programa
+	/**
+	 * programa - ProgramaBO - Business Object del programa al cual el bloque esta asociado.
+	 */
     @ManyToOne
 	@JoinColumn(name="FK_idPrograma")
 	private ProgramaBO programa;

@@ -18,7 +18,7 @@ import co.edu.unicesi.sama.entidades.*;
 import co.edu.unicesi.sama.exception.SamaException;
 
 /**
- * Session Bean implementation class ManejoProgramaSession
+ * Esta clase es la encargada de manejar las asociaciones de las lineas de competencias.
  */
 @Stateless
 public class ManejoCompetenciasSession implements ManejoCompetenciasRemote, ManejoCompetenciasLocal  {
@@ -26,16 +26,15 @@ public class ManejoCompetenciasSession implements ManejoCompetenciasRemote, Mane
 	@PersistenceContext(unitName = DBUtil.PU_DT)
 	protected EntityManager entityManager;
     /**
-     * Default constructor. 
+     * Constructor. 
      */
     public ManejoCompetenciasSession() {
         // TODO Auto-generated constructor stub
     }
 
-	
-
-
-
+    /**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String crearAsociacionLineaProfesional(String linea, String programa)
 			throws SamaException {
@@ -83,11 +82,9 @@ public class ManejoCompetenciasSession implements ManejoCompetenciasRemote, Mane
 	}
 	}
 
-
-
-
-
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String eliminarAsociacionLineaProfesional(String linea,
 			String programa) throws SamaException {
@@ -124,10 +121,6 @@ public class ManejoCompetenciasSession implements ManejoCompetenciasRemote, Mane
 			
 			 return "Asociacion eliminada con exito";
 			
-		
-			
-			
-			
 			
 			
 		}catch(Exception e){
@@ -136,8 +129,6 @@ public class ManejoCompetenciasSession implements ManejoCompetenciasRemote, Mane
 			
 		}
 	}
-
-
 
 
 }

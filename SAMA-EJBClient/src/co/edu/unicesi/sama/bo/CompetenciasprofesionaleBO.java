@@ -8,14 +8,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
-
+/**
+ * Esta clase se encarga de crear el Business Object de una competencia profesional.
+ *
+ */
 public class CompetenciasprofesionaleBO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * idCompetenciaProfesional - int - id de la competencia profesional.
+	 */
 	@Id
 	private int idCompetenciaProfesional;
 
+	/**
+	 * descripcion - String - descripcion de la competencia profesional
+	 */
 	private String descripcion;
 
 	private int nivel;

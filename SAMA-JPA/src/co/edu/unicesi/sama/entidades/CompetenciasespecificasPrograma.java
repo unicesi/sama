@@ -2,15 +2,19 @@ package co.edu.unicesi.sama.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.Set;
 
 
-/**
- * The persistent class for the competenciasespecificas_programas database table.
- * 
+/** 
+ * Clase encargada de la persistencia de la tabla competenciasespecificas_programas en la base de datos.
  */
 @Entity
 @Table(name="competenciasespecificas_programas")
+@NamedQueries({
+	@NamedQuery(name="buscarCompetenciaEspecificaProgramaporPK", query="SELECT c FROM CompetenciasespecificasPrograma c WHERE c.id.FK_CodigoPrograma LIKE :programa AND c.id.FK_IdCompetenciaEspecifica LIKE :compeEspe"),
+	
+})
 public class CompetenciasespecificasPrograma implements Serializable {
 	private static final long serialVersionUID = 1L;
 

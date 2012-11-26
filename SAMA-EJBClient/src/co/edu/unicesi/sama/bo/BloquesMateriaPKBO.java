@@ -4,12 +4,23 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
+/**
+ * 
+ * Esta clase se encarga de crear el Business Object de un BloqueMateriaPK.
+ *
+ */
 @Embeddable
 public class BloquesMateriaPKBO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * FK_idMateria - int - id de la materia.
+	 */
 	private int FK_idMateria;
 
+	/**
+	 * FK_idBloque - int - id del bloque.
+	 */
 	private int FK_idBloque;
 
 	public int getFK_idMateria() {

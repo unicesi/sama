@@ -8,9 +8,8 @@ import co.edu.unicesi.sama.bo.CompetenciaEspecificaBO;
 import java.util.Set;
 
 
-/**
- * The persistent class for the competenciasespecificas database table.
- * 
+/** 
+ * Clase encargada de la persistencia de la tabla competenciasespecificas en la base de datos.
  */
 @Entity
 @Table(name="competenciasespecificas")

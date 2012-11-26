@@ -10,14 +10,29 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
-
+/**
+ * Esta clase se encarga de crear un Business Object de una competencia especifica.
+ */
 public class CompetenciaEspecificaBO implements Serializable {
+	
+	/**
+	 * idLineaDeCompetencia - int - id de la linea de competencias.
+	 */
 	private int idLineaDeCompetencia;
 
+	/**
+	 * descripcion - String - descripcion de la competencia especifica.
+	 */
 	private String descripcion;
 
+	/**
+	 * nombre - String - nombre de la competencia especifica.
+	 */
 	private String nombre;
 	
+	/**
+	 * asociado - boolean - determina si la competencia esta asociada o no.
+	 */
 	private boolean asociado;
 
 	public int getIdLineaDeCompetencia() {

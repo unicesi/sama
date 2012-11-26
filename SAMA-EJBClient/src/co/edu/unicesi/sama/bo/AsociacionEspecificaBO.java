@@ -5,10 +5,11 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
-
-
-
-
+/**
+ * 
+ * Esta clase se encarga de crear el BusinesObject de una asociacion especifica.
+ *
+ */
 @Embeddable
 public class AsociacionEspecificaBO implements Serializable {
 	private static final long serialVersionUID = 1L;

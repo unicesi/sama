@@ -11,8 +11,7 @@ import java.util.Set;
 
 
 /**
- * The persistent class for the bloques database table.
- * 
+ * Clase encargada de la persistencia de la tabla bloques en la base de datos.
  */
 @Entity
 @Table(name="bloques")
@@ -23,11 +22,20 @@ import java.util.Set;
 public class Bloque implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * idBloque - int - id del bloque.
+	 */
 	@Id
 	private int id;
 
+	/**
+	 * descripcion - String - descripcion del bloque.
+	 */
 	private String descripcion;
-
+	
+	/**
+	 * nombre - String - nombre del bloque.
+	 */
 	private String nombre;
 
 	//bi-directional many-to-one association to Programa
@@ -52,6 +60,9 @@ public class Bloque implements Serializable {
 		)
 	private Set<Materia> materias;
 
+    /**
+     * Constructor.
+     */
     public Bloque() {
     }
 

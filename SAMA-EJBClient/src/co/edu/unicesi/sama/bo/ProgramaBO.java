@@ -4,23 +4,34 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
 
-
 /**
- * The persistent class for the Programas database table.
- * 
+ * Esta clase se encarga de crear el BussinesObject de un programa.
+ *
  */
 @Entity
 @Table(name="Programas")
 public class ProgramaBO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * idPrograma - int - id del programa.
+	 */
 	@Id
 	private String idPrograma;
 
+	/**
+	 * descripcion - String - descripcion del programa.
+	 */
 	private String descripcion;
 
+	/**
+	 * nombre - String - nombre del programa.
+	 */
 	private String nombre;
 
+	/**
+	 * Constructor.
+	 */
     public ProgramaBO() {
     }
 

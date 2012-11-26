@@ -19,25 +19,23 @@ import co.edu.unicesi.sama.entidades.Programa;
 import co.edu.unicesi.sama.exception.SamaException;
 
 /**
- * Session Bean implementation class ManejoProgramaSession
+ * Bean de sesion encargado del manejo de las asociaciones de materias a los bloques.
  */
 @Stateless
 public class ManejoBloquesMateriaSession implements ManejoBloquesMateriaRemote, ManejoBloquesMateriaLocal  {
 
 	@PersistenceContext(unitName = DBUtil.PU_DT)
 	protected EntityManager entityManager;
-    /**
-     * Default constructor. 
+	/**
+     * Constructor. 
      */
     public ManejoBloquesMateriaSession() {
         // TODO Auto-generated constructor stub
     }
 
-	
-
-
-
-
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public String crearBloquesMateria(String bloque, String materia)
 			throws SamaException {
@@ -87,6 +85,9 @@ public class ManejoBloquesMateriaSession implements ManejoBloquesMateriaRemote, 
 		
 	}
 	
+	/**
+     * {@inheritDoc}
+     */
 	public String eliminarBloquesMateria(String bloque, String materia)
 			throws SamaException {
 		
@@ -120,12 +121,7 @@ public class ManejoBloquesMateriaSession implements ManejoBloquesMateriaRemote, 
 			entityManager.flush();
 			
 			 return "Asociacion eliminada con exito";
-			
-		
-			
-			
-			
-			
+
 			
 		}catch(Exception e){
 			e.printStackTrace();

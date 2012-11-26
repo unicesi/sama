@@ -4,8 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the competenciasespecificas_programas database table.
- * 
+ * Clase de la llave primaria de la tabla competenciasespecificas_programa en la base de datos.
  */
 @Embeddable
 public class CompetenciasespecificasProgramaPK implements Serializable {

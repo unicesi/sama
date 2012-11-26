@@ -1,3 +1,4 @@
-#Sat Nov 10 12:41:37 COT 2012
 eclipse.preferences.version=1
 org.eclipse.jpt.core.platform=eclipselink2_3
+problem.TABLE_UNRESOLVED_SCHEMA=warning
+workspace_preferences_overriden=true

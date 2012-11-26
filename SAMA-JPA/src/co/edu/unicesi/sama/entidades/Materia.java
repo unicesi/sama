@@ -9,8 +9,7 @@ import java.util.Set;
 
 
 /**
- * The persistent class for the materias database table.
- * 
+ * Clase encargada de la persistencia de la tabla materias en la base de datos.
  */
 @Entity
 @Table(name="materias")
@@ -21,15 +20,30 @@ import java.util.Set;
 public class Materia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * codigo - String - codigo de la materia.
+	 */
 	@Id
 	private String codigo;
 
+	/**
+	 * creditos - int - creditos de la materia.
+	 */
 	private int creditos;
 
+	/**
+	 * descripcion - String - descripcion de la materia.
+	 */
 	private String descripcion;
 
+	/**
+	 * nombre - String - nombre de la materia.
+	 */
 	private String nombre;
 
+	/**
+	 * semestre - String - semestre en el que se deberia ver la materia.
+	 */
 	private String semestre;
 
 	//bi-directional many-to-many association to Bloque

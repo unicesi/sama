@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+
+/**
+ * Esta clase se encarga de crear el Business Object de una competencia profesional.
+ */
 public class CompetenciaTerminalBO implements Serializable{
 
 	

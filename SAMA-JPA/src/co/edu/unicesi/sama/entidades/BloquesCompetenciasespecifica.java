@@ -6,9 +6,8 @@ import javax.persistence.*;
 import co.edu.unicesi.sama.bo.AsociacionEspecificaBO;
 
 
-/**
- * The persistent class for the bloques_competenciasespecificas database table.
- * 
+/** 
+ * Clase encargada de la persistencia de la tabla bloque_competenciasespecificas en la base de datos.
  */
 @Entity
 @Table(name="bloques_competenciasespecificas")
@@ -19,14 +18,19 @@ import co.edu.unicesi.sama.bo.AsociacionEspecificaBO;
 public class BloquesCompetenciasespecifica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * id - int - id de la competencia.
+	 */
 	@EmbeddedId
 	private BloquesCompetenciasespecificaPK id;
 
 	private int aplica;
 
-	private int enseña;
+	private int ense–a;
 
 	private int introduce;
+	
+	private int puntaje;
 
 	//bi-directional many-to-one association to Bloque
     @ManyToOne
@@ -61,11 +65,11 @@ public class BloquesCompetenciasespecifica implements Serializable {
 	}
 
 	public int getEnseña() {
-		return this.enseña;
+		return this.ense–a;
 	}
 
 	public void setEnseña(int enseña) {
-		this.enseña = enseña;
+		this.ense–a = enseña;
 	}
 
 	public int getIntroduce() {
@@ -95,9 +99,17 @@ public class BloquesCompetenciasespecifica implements Serializable {
 	public AsociacionEspecificaBO toBo(){
 		AsociacionEspecificaBO bo= new AsociacionEspecificaBO();
 		bo.setAplica(aplica);
-		bo.setEnsena(enseña);
+		bo.setEnsena(ense–a);
 		bo.setIntroduce(introduce);
 		return bo;
+	}
+
+	public int getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
 	}
 	
 }

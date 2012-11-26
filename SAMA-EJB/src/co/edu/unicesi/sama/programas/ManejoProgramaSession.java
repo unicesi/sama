@@ -10,7 +10,7 @@ import co.edu.unicesi.sama.entidades.Programa;
 import co.edu.unicesi.sama.exception.SamaException;
 
 /**
- * Session Bean implementation class ManejoProgramaSession
+ * Esta clase es la encargada de crear programas.
  */
 @Stateless
 public class ManejoProgramaSession implements ManejoProgramaRemote, ManejoProgramaLocal  {
@@ -18,12 +18,15 @@ public class ManejoProgramaSession implements ManejoProgramaRemote, ManejoProgra
 	@PersistenceContext(unitName = DBUtil.PU_DT)
 	protected EntityManager entityManager;
     /**
-     * Default constructor. 
+     * Constructor. 
      */
     public ManejoProgramaSession() {
         // TODO Auto-generated constructor stub
     }
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public String crearPrograma(ProgramaBO programa) throws SamaException {
 		

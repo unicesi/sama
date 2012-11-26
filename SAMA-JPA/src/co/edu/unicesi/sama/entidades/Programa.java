@@ -9,8 +9,7 @@ import java.util.Set;
 
 
 /**
- * The persistent class for the programas database table.
- * 
+ * Clase encargada de la persistencia de la tabla programas en la base de datos.
  */
 @Entity
 @Table(name="programas")
@@ -21,11 +20,20 @@ import java.util.Set;
 public class Programa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * codigo - String - codigo del programa.
+	 */
 	@Id
 	private String codigo;
 
+	/**
+	 * descripcion - String - descripcion del programa.
+	 */
 	private String descripcion;
 
+	/**
+	 * nombre - String - nombre del programa.
+	 */
 	private String nombre;
 
 	//bi-directional many-to-one association to Bloque
