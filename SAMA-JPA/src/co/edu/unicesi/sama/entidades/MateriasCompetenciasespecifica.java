@@ -23,7 +23,7 @@ public class MateriasCompetenciasespecifica implements Serializable {
 
 	private int aplica;
 
-	private int ense–a;
+	private int enseña;
 
 	private int introduce;
 
@@ -61,11 +61,11 @@ public class MateriasCompetenciasespecifica implements Serializable {
 	}
 
 	public int getEnseña() {
-		return this.ense–a;
+		return this.enseña;
 	}
 
 	public void setEnseña(int enseña) {
-		this.ense–a = enseña;
+		this.enseña = enseña;
 	}
 
 	public int getIntroduce() {
@@ -95,7 +95,7 @@ public class MateriasCompetenciasespecifica implements Serializable {
 	public AsociacionEspecificaBO toBo(){
 		AsociacionEspecificaBO bo= new AsociacionEspecificaBO();
 		bo.setAplica(aplica);
-		bo.setEnsena(ense–a);
+		bo.setEnsena(enseña);
 		bo.setIntroduce(introduce);
 		return bo;
 	}

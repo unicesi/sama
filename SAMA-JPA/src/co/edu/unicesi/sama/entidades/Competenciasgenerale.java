@@ -16,7 +16,7 @@ public class Competenciasgenerale implements Serializable {
 	@Id
 	private int id;
 
-	private String descripci—n;
+	private String descripción;
 
 	private String nombre;
 
@@ -49,11 +49,11 @@ public class Competenciasgenerale implements Serializable {
 	}
 
 	public String getDescripción() {
-		return this.descripci—n;
+		return this.descripción;
 	}
 
 	public void setDescripción(String descripción) {
-		this.descripci—n = descripción;
+		this.descripción = descripción;
 	}
 
 	public String getNombre() {
